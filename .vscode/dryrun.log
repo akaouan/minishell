@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/ael-hayy/Desktop/minishell_work_space'
+cd libft && make
+cd ..
+gcc -Wall -Werror -Wextra -fsanitize=address -g *c -lreadline -o minishell libft/libft.a
+make: Leaving directory `/Users/ael-hayy/Desktop/minishell_work_space'
+ 
