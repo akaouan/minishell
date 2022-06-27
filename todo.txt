@@ -1,0 +1,61 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    todo.txt                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/05/11 13:12:15 by ael-hayy          #+#    #+#              #
+#    Updated: 2022/06/09 15:42:09 by ael-hayy         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+error:
+	parentheses
+	quotes
+	unknown symbol (digits litters > < ' " | $ - _ ~ =  ? () )
+	redirects errors
+
+
+
+
+
+proditc $
+any herdoc in the next pipes 
+if yes
+how much && where
+input priorities is the last
+
+
+free fd
+
+
+
+
+rempveqoutstr       
+
+
+
+
+
+
+sigv
+
+
+
+
+
+
+
+
+
+rec(scrept)
+{
+	int i = scrept->numof chiles;
+	if (i == 0)
+		execute(scrept->cmd);
+		return ;
+	while (j < number of child)
+		rec(scrept->next[j]);
+}
