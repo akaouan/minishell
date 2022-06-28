@@ -215,6 +215,8 @@ char	*get_val(char *str, t_cmd *pipe, int j, int f)
 	char	*tem_tw;;
 
 	i = 0;
+	if (!str)
+		return (str);
 	while (str[i])
 	{
 		if (j)
@@ -230,6 +232,8 @@ char	*get_val(char *str, t_cmd *pipe, int j, int f)
 			str = change_vall(str, tem_tw);
 		}
 		i++;
+		if (!str)
+			break;
 	}
 	return (str);
 }

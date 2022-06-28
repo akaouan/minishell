@@ -37,7 +37,7 @@ int next_qoute(char *line, char c)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int check_parentheses(char *line)
@@ -54,7 +54,11 @@ int check_parentheses(char *line)
 	while (line[i])
 	{
 		if (line[i] == '\"' || line[i] == '\'')
+		{
+			if (-1 == next_qoute(&line[i], line[i]))
+				return (1);
 			i += next_qoute(&line[i], line[i]);
+		}
 		else if (line[i] == '(')
 		{
 			if (i == 0)

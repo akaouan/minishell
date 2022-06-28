@@ -76,5 +76,5 @@ void		process_quotes(t_cmd *pipe);
 void		files_open(t_cmd *pipe);
 int			no_quote_found(char *str);
 int			untill_char(char *str, char c);
-char		*get_next_line(void);
+// char		*get_next_line(void);
 #endif

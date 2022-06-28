@@ -32,6 +32,8 @@ typedef struct n_exec_elems{
 	int		size;
 	t_prior	*data;
 	int		cmd_index;
+	int		cmd_input;
+	int		cmd_output;
 }	t_exec_elems;
 
 void	wr_error(int fd, char *err_msg);
@@ -47,5 +49,4 @@ void	update_pipes(int **pipes, int to_close);
 void    cmd_cd(char **args);
 void    cmd_pwd(t_prior *data);
 void    cmd_echo(char **args);
-char *get_next_line(int fd);
 #endif

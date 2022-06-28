@@ -18,10 +18,10 @@ void	execution(t_prior *data, t_exec_elems *elems)
 	int j = 0;
 	if (!data->numofchilds)
 	{
-		// update_elems(elems, data);
-		// execute(elems);
+		update_elems(elems, data);
+		execute(elems);
 		// printf("[%d] in: %d, out: %d\n", elems->cmd_index, elems->data->cmd->read_from[0], elems->data->cmd->write_to[0]);
-		// update_pipes(elems->pipes, elems->p2);
+		update_pipes(elems->pipes, elems->p2);
 		// elems->cmd_index++;
 		return ;
 	}
@@ -64,12 +64,12 @@ int main(int ac, char **av, char **env)
 		}
 		script = m_shell_parser(line);
 		tree_parser(script, env);
-		// init_exec_elems(&elems, script, script->numofchilds);
-		// execution(script, elems);
-		// wait_pids(elems);
-		// close_pipes(elems->pipes);
-		// // free_tree(script);
-		// free(script);
-		// free (line);
+		init_exec_elems(&elems, script, script->numofchilds);
+		execution(script, elems);
+		wait_pids(elems);
+		close_pipes(elems->pipes);
+		// free_tree(script);
+		free(script);
+		free (line);
    }
 }

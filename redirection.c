@@ -154,7 +154,10 @@ int	cmd_and_args(t_cmd *pipe, int i)
 		i++;
 	i = get_file_name(pipe, i, &word);
 	if (!pipe->cmd)
+	{
 		pipe->cmd = word;
+		push_back(&(pipe->args), strdup(word));
+	}
 	else
 		push_back(&(pipe->args), word);
 	return (i);
