@@ -10,27 +10,34 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC			=		gcc
-CFLAGS		=		-Wall -Wextra -Werror
-INCLUDE		=		-I Headers
-CLABRARY	=		-readline
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+RM = rm -f
+NAME = minishell
+FILES = *c
 
-NAME		=		minishell
+OBJECTS = $(FILES:.c=.o)
 
-SOURCE		=		being_ready.c free.c \
-					m_shell_tree.c minishell.c \
-					open_files.c pre_line_check.c \
-					redirection.c set_env.c tree_parser.c
+%.o : %.c
+	@cc -c -Wall -Wextra -Werror $<
 
-OBJDIR		=		objects
+all:  $(NAME)
 
-$(NAME): $(OBJDIR) $(SOURCE)
-		$(CC) $(CFLAGS) $(OBJDIR)/*.o -o $(NAME)
+$(NAME): $(OBJECTS)
+	@cd libft && make
+	@cd ..
+	@$(CC) $(CFLAGS) $(OBJECTS) -lreadline -o $(NAME) libft/libft.a
 
-$(SOURCE): $(OBJDIR)
-		$(CC) $(CFLAGS) $(SOURCE) -c -o $(OBJDIR)
+clean:
+	$(RM) *.o
+	cd libft && make clean
+	cd ../
 
-$(OBJDIR):
-		mkdir -p $(OBJDIR)
+fclean: clean
+	@cd libft && make fclean
+	@cd ../
+	$(RM) $(NAME)
 
+re: fclean all
 
+.PHONY: all clean fclean re bonus

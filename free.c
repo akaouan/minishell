@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:24 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/22 16:00:13 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/12 10:46:56 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@ void	free_tree(t_prior *script)
 		while (script->slices[j])
 		{
 			free(script->slices[j]);
-			free(script->operator[j]);
 			j++;
 		}
 		free(script->slices[j]);
-		free(script->operator[j]);
+
+		//free(script->operator[0]);
+		//free(script->operator[j]);
 		free(script->operator);
 		free(script->slices);
 		return ;
 	}
 	j = 0;
-	while (script->operator[j])
+	while (script->operator && script->operator[j])
 	{
 		free(script->operator[j]);
 		j++;
@@ -47,7 +48,7 @@ void	free_tree(t_prior *script)
 		j++;
 	}
 	free(script->slices[j]);
-	free(script->operator[j]);
+	//free(script->operator[j - 1]);
 	free(script->slices);
 	free(script->operator);
 	

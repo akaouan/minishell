@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:09:49 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/10 16:43:05 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:34:16 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,15 @@ void	open_output(t_cmd *pipe)
 		{
 			pipe->A[0] = -1;
 			printf("monosholo: %s:permission denied\n", pipe->filesout[i]);
-			while (i++ > 0)
+			while (i-- > 0)
 				close (pipe->outputs[i]);
 			break ;
 		}
 		i++;
 	}
+	i--;
+	while (i-- > 0)
+		close (pipe->outputs[i]);
 	pipe->A[0] = 1;
 }
 
@@ -113,11 +116,21 @@ void	open_input(t_cmd *pipe)
 		{
 			pipe->A[0] = -1;
 			printf("monosholo: %s:permission denied or file doesnt exitst\n", pipe->filesin[i]);
-			while (i++ > 0)
+			while (i-- > 0)
+			{
+				printf("****8%d**\n", i);
 				close (pipe->inputs[i]);
+			}
+			printf("oo %d\n", i);
 			break ;
 		}
 		i++;
+	}
+	i--;
+	while (i-- > 0)
+	{
+		printf("****8%d**\n", pipe->inputs[i]);
+		close (pipe->inputs[i]);
 	}
 	pipe->A[0] = 1;
 }
@@ -136,7 +149,7 @@ void	open_append(t_cmd *pipe)
 		{
 			pipe->A[0] = -1;
 			printf("monosholo: %s:permission denied or file doesnt exitst\n", pipe->files_appends[i]);
-			while (i++ > 0)
+			while (i-- > 0)
 				close (pipe->appends[i]);
 			break ;
 		}
@@ -147,7 +160,6 @@ void	open_append(t_cmd *pipe)
 
 void	read_write(t_cmd *pipe)
 {
-	pipe->read_from = malloc(sizeof(int));
 	pipe->write_to = malloc(sizeof(int));
 	if (pipe->lastout[0] == 1)
 		pipe->read_from[0] = pipe->fd[0];
@@ -166,10 +178,13 @@ void	read_write(t_cmd *pipe)
 
 void	files_open(t_cmd *pipe)
 {
+	if (pipe->read_from[0] != -1)
+	{
 	pipe->A = malloc(sizeof(int));
 	open_her_doc(pipe);
 	open_output(pipe);
 	open_input(pipe);
 	open_append(pipe);
 	read_write(pipe);
+	}
 }

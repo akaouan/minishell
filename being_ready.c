@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:44:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/26 10:45:56 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:58:55 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_srtuct_bzero(t_cmd *pipe)
 	pipe->env_valuue = 0;
 	pipe->env_var = 0;
 	pipe->lastout = 0;
+	pipe->read_from = malloc(sizeof(int));
 }
 
 
@@ -38,6 +39,8 @@ void	ft_srtuct_bzero(t_cmd *pipe)
 t_cmd	*cmd_parse(char *line, char **env)
 {
 	t_cmd	*pipe;
+	int		j;
+
 	pipe = malloc(sizeof(t_cmd));
 	ft_srtuct_bzero(pipe);
 	pipe->line = line;
@@ -50,7 +53,7 @@ t_cmd	*cmd_parse(char *line, char **env)
 	pipe->outputs_num[0] = 0;
 	pipe->append_num[0] = 0;
 	pipe->her_doc[0] = 0;
-	redirections(pipe);
+	j = redirections(pipe);
 	return (pipe);
 }
 

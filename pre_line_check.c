@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/26 14:29:12 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:06:26 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ int next_qoute(char *line, char c)
 	return (-1);
 }
 
+// int check_parentheses(char *line)
+// {
+// 	int i;
+// 	int j;
+// 	int k;
+
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	while (line[i] == ' ')
+// 		i++;
+// 	while(line[i])
+// 	{
+// 		i++;
+
+// 	}
+// }
+
+
 int check_parentheses(char *line)
 {
 	int i;
@@ -55,8 +74,11 @@ int check_parentheses(char *line)
 	{
 		if (line[i] == '\"' || line[i] == '\'')
 		{
-			if (-1 == next_qoute(&line[i], line[i]))
+			if (next_qoute(&line[i], line[i]) == -1)
+			{
+				write(2, ">$ syntax error Unclosed qoute\n", 31);
 				return (1);
+			}
 			i += next_qoute(&line[i], line[i]);
 		}
 		else if (line[i] == '(')
@@ -74,7 +96,12 @@ int check_parentheses(char *line)
 						continue ;
 					}
 					if (line[k] != '|' && line[k] != '&' && line[k] != '(')
+					{
+						write(2, ">$ syntax error near unexpected token `", 40);
+						write(2, &line[k], 1);
+						write(2, "'\n", 2);
 						return (1);
+					}
 					else
 						break ;
 					k--;
@@ -88,6 +115,11 @@ int check_parentheses(char *line)
 			return (1);
 		i++;
 	}
+	if (j != 0)
+	{
+		write(2, ">$ syntax error near unexpected token `('\n", 42);
+		return (1);
+	}
 	return (0);
 }
 int	check_andor(char *line)
@@ -95,46 +127,67 @@ int	check_andor(char *line)
 	int	i;
 	int	k;
 	int	l;
-
+	int	j;
 	i = 0;
 	k = 0;
 	l = 0;
+	j = 0;
 	while (line[i])
 	{
+		while (line[i] == ' ')
+			i++;
+		if (!j && (line[i] == '|' || line[i] == '&'))
+		{
+			write(2, ">$ syntax error near unexpected token `", 40);
+			write(2, &line[k], 1);
+			write(2, "'\n", 2);
+			return (1);
+		}
+		j = 1;
 		if (line[i] == '\"' || line[i] == '\'')
 			i += next_qoute(&line[i], line[i]);
 		if (line[i] == '|' || line[i] == '&')
 		{
+			j = 0;
 			if (l == 0)
 				return (1);
 			if (line[i] == '&' && line[i + 1] != '&')
+			{
+				write(2, ">$ syntax error near unexpected token `", 40);
+				write(2, &line[k], 1);
+				write(2, "'\n", 2);
 				return (1);
+			}
 			if (i == 0)
 				return (1);
 			else
 			{
-				k = i - 1;
+				if (line[i + 1] == '|' || line[i + 1] == '&')
+					i++;
+				k = i + 1;
 				while (k >= 0)
 				{
-					if (line[k] == ' ')
+					while (line[k] == ' ')
+						k++;
+					if (line[k] == '|' || line[k] == '&' || line[i] == '(' || line[i] == ')')
 					{
-						k--;
-						continue ;
-					}
-					if (line[k] == '|' || line[k] == '&' || line[i] == '(')
+						write(2, ">$ syntax error near unexpected token `", 40);
+						write(2, &line[k], 1);
+						write(2, "'\n", 2);
 						return (1);
+					}
 					else
 						break ;
 				}
 				if (k == 0 && line[k] == ' ')
 					return (1);
 			}
-			if (line[i + 1] == '|' || line[i + 1] == '&')
-				i++;
 			l = 0;
 		}
 		if (line[i] != ' ' && !(line[i] == '|' || line[i] == '&'))
 			l = 1;
+		if (line[i] != '|' && line[i] != '&')
+			j = 1;
 		i++;
 	}
 	if (l == 0)
@@ -149,6 +202,21 @@ int	rev_next_quote(char *line, int	j, char c)
 		j--;
 	return (j);
 }
+
+// int	check_and_or(char *line)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	k;
+
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	while (line[i])
+// 	{
+// 		if (line[i] == )
+// 	}
+// }
 
 int	revcheck(char *line)
 {
@@ -175,7 +243,12 @@ int	revcheck(char *line)
 						continue ;
 					}
 					if (line[k] == '|' || line[k] == '&' || line[i] == ')')
+					{
+						write(2, ">$ syntax error near unexpected token `", 40);
+						write(2, &line[k], 1);
+						write(2, "'\n", 2);
 						return (1);
+					}
 					else
 						break ;
 				}
@@ -190,12 +263,105 @@ int	revcheck(char *line)
 	return (0);
 }
 
+int	check_dir(char *line)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '<')
+			j++;
+		else if (line[i] == '>')
+			k++;
+		else if(line[i] != ' ')
+		{
+			k = 0;
+			j = 0;
+		}
+		if (j > 2 || k > 2)
+		{
+			write(2, ">$ syntax error near unexpected token `", 40);
+			write(2, &line[i], 1);
+			write(2, "'\n", 2);
+			return (1);
+		}
+		if (line[i] == '<')
+		{
+			i++;
+			while (line[i] == ' ')
+				i++;
+			if (!line[i])
+			{
+				write(2, ">$ syntax error near unexpected token `<'\n", 42);
+				return (1);
+			}
+			if (line[i] == '>'|| line[i ] == '|' || line[i ] == '&' || line[i ] == '(' || line[i ] == ')')
+				{
+					write(2, ">$ syntax error near unexpected token `", 40);
+					write(2, &line[i], 1);
+					write(2, "'\n", 2);
+					return (1);
+				}
+			if (line[i] == '<')
+			{
+				i++;
+				while (line[i] == ' ')
+					i++;
+				if (line[i] == '<' || line[i] == '>'|| line[i ] == '|' || line[i ] == '&' || line[i ] == '(' || line[i ] == ')')
+				{
+					write(2, ">$ syntax error near unexpected token `", 40);
+					write(2, &line[i], 1);
+					write(2, "'\n", 2);
+					return (1);
+				}
+			}
+		}
+		else if (line[i] == '>')
+		{
+			i++;
+			while (line[i] == ' ')
+				i++;
+			if (!line[i])
+			{
+				write(2, ">$ syntax error near unexpected token `>'\n", 42);
+				return (1);
+			}
+			if (line[i ] == '<' || line[i ] == '|' || line[i ] == '&' || line[i ] == '(' || line[i ] == ')')
+			{
+				write(2, ">$ syntax error near unexpected token `", 40);
+				write(2, &line[i], 1);
+				write(2, "'\n", 2);
+				return (1);
+			}
+			if (line[i] == '>')
+			{
+				i++;
+				while (line[i] == ' ')
+					i++;
+				if (line[i] == '<' || line[i] == '>'|| line[i ] == '|' || line[i ] == '&' || line[i ] == '(' || line[i ] == ')')
+				{
+					write(2, ">$ syntax error near unexpected token `", 40);
+					write(2, &line[i], 1);
+					write(2, "'\n", 2);
+					return (1);
+				}
+			}
+		}
+		i++; 
+	}
+	return (0);
+}
+
 int pre_check_line(char *line)
 {
 	if (check_parentheses(line) || check_andor(line)
-			|| revcheck(line))
+			|| revcheck(line) || check_dir(line))
 	{
-		write(2, ">$ syntax error near unexpected token\n", 38);
 		return (1);
 	}
 	return (0);

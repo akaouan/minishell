@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:49:57 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/10 16:38:52 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:31:50 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char *rm_dollar(char *str, char c)
 	return (tem);
 }
 
-char *variable(char *str, t_cmd *pipe)
+char *variable(char *str, t_cmd *pipe, int f)
 {
 	int		i;
 	int		j;
@@ -155,17 +155,56 @@ char *variable(char *str, t_cmd *pipe)
 	}
 	tem[j] = '\0';
 	tem = get_valuue(tem, pipe);
-	return (tem);
-	
+	//printf("siuhcdihdihdciu  %s\n", tem);
+	j = 0;
+	if (tem)
+		while (tem[j])
+		{
+			if (tem[j] == ' ' && f)
+			{
+				pipe->read_from[0] = -1;
+				write(2, "ambiguous redirect\n", 19);
+				return (tem);
+			}
+			j++;
+		}
+	else if (!tem && f)
+	{
+		pipe->read_from[0] = -1;
+		write(2, "ambiguous redirect\n", 19);
+		return (tem);
+	}
+	return (tem);   // ! continueee
 }
 
 int	untill_char(char *str, char c)
 {
 	int	i;
+	int	k;
 
 	i = 0;
-	while (str[i] && str[i] != c)
+	k = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+		{
+			//printf("^^;;\n");
+			if (!k)
+				k = 1;
+			else
+				k = 0;
+		}
+		if (str[i] == '\'' && !k)
+		{
+			//printf("::::::::::::::[ %s ]\n", &str[i]);
+			i += next_qoute(&str[i ], '\'');
+			//printf("::::::::::::::[ %s ]\n", &str[i]);
+			//exit(0);
+		}
+		if (str[i] == c)
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -192,6 +231,7 @@ char	*change_vall(char *str,char *var)
 	char	*tem_tw;
 
 	tem_t = str;
+	//printf("std befor:   %s\n", str);
 	j = untill_char(str, '$');
 	tem = ft_substr(str, 0, j);
 	j += after_var(&str[j + 1]);
@@ -206,34 +246,52 @@ char	*change_vall(char *str,char *var)
 	if (tem_tw)
 		free(tem_tw);
 	free(tem_t);
+	//printf("std after:   %s\n", str);
 	return (str);
 }
 
 char	*get_val(char *str, t_cmd *pipe, int j, int f)
 {
 	int		i;
-	char	*tem_tw;;
+	int		k;
+	char	*tem_tw;
 
 	i = 0;
-	if (!str)
-		return (str);
+	k = 0;
 	while (str[i])
 	{
+		//printf("{%s }\n", &str[i]);
+		if (str[i] == '\"')
+		{
+			//printf("^^\n");
+			if (!k)
+				k = 1;
+			else
+				k = 0;
+		}
 		if (j)
-			if (str[i] == '\'')
+			if (str[i] == '\'' && !k)
 			{
-				i += next_qoute(&str[i], '\'');
+				//printf("::::::::::::::[ %s ]\n", &str[i]);
+				i += next_qoute(&str[i ], '\'');
+				//printf("::::::::::::::[ %s ]\n", &str[i]);
+				//exit(0);
 			}
 		if (str[i] == '$')
 		{
-			tem_tw = variable(&str[i + 1], pipe);
+			printf("PPPPP   %s\n", &str[i]);
+			tem_tw = variable(&str[i + 1], pipe, f);
 			if (f == 1 && !tem_tw)
+			{
+				//printf("getval\n");
+				pipe->read_from[0] = -1;
 				write(2, "ambiguous redirect\n", 19);
+				return (0);
+			}
 			str = change_vall(str, tem_tw);
+			i--;
 		}
 		i++;
-		if (!str)
-			break;
 	}
 	return (str);
 }
@@ -282,6 +340,8 @@ char	*remove_quotes_str(char *str, t_cmd *pipe, int f)
 	if (!str)
 		return (str);
 	str = get_val(str, pipe, 1, f);
+	if (pipe->read_from[0] == -1)
+		return (0);
 	if (no_quote_found(str))
 		return (ft_strdup(str));
 	len = len_without_quotes(str);
@@ -336,19 +396,28 @@ char	**remove_quotes(char **str, t_cmd *pipe, int f)
 	while (i < j)
 	{
 		new_str[i] = remove_quotes_str(str[i], pipe, f);
+		if (pipe->read_from[0] == -1)
+			return (0); //! free here
 		i++;
 	}
 	new_str[i] = 0;
-	free(str);
+	free(str); // ! free here
 	return (new_str);
 }
 
-void	process_quotes(t_cmd *pipe)
+int	process_quotes(t_cmd *pipe)
 {
 	pipe->cmd = remove_quotes_str(pipe->cmd, pipe, 0);
 	pipe->args = remove_quotes(pipe->args, pipe, 0);
 	pipe->filesin = remove_quotes(pipe->filesin, pipe, 1);
+	if (pipe->read_from[0] == -1)
+		return -1;
 	pipe->filesout = remove_quotes(pipe->filesout, pipe, 1);
+	if (pipe->read_from[0] == -1)
+		return -1;
 	pipe->files_appends = remove_quotes(pipe->files_appends, pipe, 1);
+	if (pipe->read_from[0] == -1)
+		return -1;
+	return (0);
 }
 

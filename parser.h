@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:37:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/11 19:39:23 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/29 09:26:04 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			all_space(char *line);
 int			strsnums(char  **slices);
 void		tree_parser(t_prior *script, char **env);
 void		set_env(t_cmd *pipe, char **env);
-void		redirections(t_cmd *pipe);
+int		redirections(t_cmd *pipe);
 void		push_back(char	***stack, char *word);
 t_cmd		*cmd_parse(char *line, char **env);
 void		ft_srtuct_bzero(t_cmd *pipe);
@@ -72,9 +72,11 @@ char		*remove_quotes_str(char *str, t_cmd *pipe, int f);
 void		free_db_str(char **str);
 char		*get_val(char *str, t_cmd *pipe, int j, int f);
 char		**remove_quotes(char **str, t_cmd *pipe, int f);
-void		process_quotes(t_cmd *pipe);
+int		process_quotes(t_cmd *pipe);
 void		files_open(t_cmd *pipe);
 int			no_quote_found(char *str);
 int			untill_char(char *str, char c);
-// char		*get_next_line(void);
+char	*change_vall(char *str,char *var);
+char *variable(char *str, t_cmd *pipe, int f);
+char		*get_next_line(void);
 #endif
