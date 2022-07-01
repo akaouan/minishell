@@ -71,8 +71,8 @@ int main(int ac, char **av, char **env)
 		tree_parser(script, env);
 		init_exec_elems(&elems, script, script->numofchilds);
 		execution(script, elems);
-		wait_pids(elems);
 		close_pipes(elems->pipes);
+		wait_pids(elems);
 		// free_tree(script);
 		free(script);
 		free (line);

@@ -25,12 +25,12 @@ void	update_pipes(int **pipes, int to_close)
 
 void	set_cmd(t_exec_elems *elems)
 {
-	if (dup2(*elems->data->cmd->write_to, STDOUT_FILENO) == -1)
+	if (dup2(elems->cmd_output, STDOUT_FILENO) == -1)
 	{
 		wr_error(STDERR_FILENO, "Faild to duplicate fd\n");
 		exit(EXIT_FAILURE);
 	}
-	if (dup2(*(elems->data->cmd->read_from), STDIN_FILENO) == -1)
+	if (dup2(elems->cmd_input, STDIN_FILENO) == -1)
 	{
 		wr_error(STDERR_FILENO, "Faild to duplicate fd\n");
 		exit(EXIT_FAILURE);
@@ -56,11 +56,11 @@ int	check_build_in(t_exec_elems *elems)
 		cmd_pwd(elems->data);
 		return (1);
 	}
-	// else if (!ft_strncmp(elems->data->cmd->cmd, "echo", 4))
-	// {
-	// 	cmd_echo(elems->args + 1);
-	// 	return (1);
-	// }
+	else if (!ft_strncmp(elems->data->cmd->cmd, "echo", 4))
+	{
+		cmd_echo(elems->args + 1);
+		return (1);
+	}
 	return(0);
 }
 
