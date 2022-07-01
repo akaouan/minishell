@@ -40,25 +40,21 @@ void    cmd_pwd(t_prior *data)
     printf("%s\n", data->cmd->env_valuue[i]);
 }
 
-void    cmd_echo(char **args)
+int is_option(char **args)
 {
-    int i;
-    int option;
 
-    i = 0;
-    option = 0;
-    if (!ft_strncmp(args[0], "-n", 2))
-    {
-        i = 1;
-        option = 1;
-    }
-    while (args[i])
-    {
-        printf("%s", args[i]);
-        if (args[i + 1])
-            printf(" ");
-        i++;
-    }
-    if (!option)
-        printf("\n");
+}
+
+int get_args_start(char **args)
+{
+
+}
+
+void    cmd_echo(int fd_output, char **args)
+{
+    int option;
+    int args_start;
+
+    option = is_option(args);
+    args_start = get_args_start(args);
 }

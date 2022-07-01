@@ -58,7 +58,7 @@ int	check_build_in(t_exec_elems *elems)
 	}
 	else if (!ft_strncmp(elems->data->cmd->cmd, "echo", 4))
 	{
-		cmd_echo(elems->args + 1);
+		cmd_echo(elems->cmd_output, elems->args + 1);
 		return (1);
 	}
 	return(0);

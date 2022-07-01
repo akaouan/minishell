@@ -62,10 +62,10 @@ int	init_pipes(int **pipes)
 			exit(EXIT_FAILURE);
 		}
 	}
-	printf("--------- pipes fd: ---------\n");
-	for(int i = 0; i < 2; i++)
-	printf("pipe in: %d\npipe out: %d\n", pipes[i][0], pipes[i][1]);
-	printf("-----------------------------\n");
+	// printf("--------- pipes fd: ---------\n");
+	// for(int i = 0; i < 2; i++)
+	// printf("pipe in: %d\npipe out: %d\n", pipes[i][0], pipes[i][1]);
+	// printf("-----------------------------\n");
 	return (1);
 }
 
