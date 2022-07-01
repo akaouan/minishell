@@ -1,0 +1,428 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Fri Jul  1 18:30:25 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/ael-hayy/Desktop/minishell_work_space
+# makefile
+SHELL = /bin/sh
+# makefile (from `Makefile', line 15)
+RM = rm -f
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 14)
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0000hq400045s/T/vscode-ipc-835bc8ee-f8d0-465b-b367-81bc75d63a44.sock
+# environment
+VSCODE_CWD = /
+# environment
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.vmTwVkGnIh/Render
+# environment
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.NQCpIGAxcG/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/ael-hayy/Desktop/minishell_work_space
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/ael-hayy
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/ael-hayy/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+# environment
+LOGNAME = ael-hayy
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/ael-hayy/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 13)
+CC = gcc
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = ael-hayy
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 16)
+NAME = minishell
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n0000hq400045s/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/ael-hayy/Library/Application Support/Code/1.68.0-main.sock
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x10B9:0:0
+# environment
+COMMAND_MODE = unix2003
+# default
+ 
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a8
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# makefile (from `Makefile', line 19)
+OBJECTS = $(FILES:.c=.o)
+# environment
+LANG = C
+# environment
+VSCODE_PID = 3080
+# makefile (from `Makefile', line 17)
+FILES = *c  ./executor/*c
+# variable set hash-table stats:
+# Load=73/1024=7%, Rehash=0, Collisions=1/108=1%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# executor (device 16777227, inode 3543312): 9 files, no impossibilities.
+# . (device 16777227, inode 3543114): 34 files, no impossibilities.
+
+# 43 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+%.o: %.c
+#  commands to execute (from `Makefile', line 22):
+	@cc -c -Wall -Wextra -Werror $<
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+executor/build_in_p2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-01 15:54:55
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+all: minishell
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+
+.PHONY: all clean fclean re bonus
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+open_files.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-29 20:45:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tree_parser.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-29 08:48:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-01 15:54:00
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+executor/execute.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-01 15:52:43
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+being_ready.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-28 07:58:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+pre_line_check.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-29 08:48:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+minishell: being_ready.c free.c m_shell_tree.c minishell.c open_files.c pre_line_check.c redirection.c set_env.c tree_parser.c executor/build_in_p1.c executor/build_in_p2.c executor/execute.c executor/init_exec_elems.c executor/utils.c
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  Last modified 2022-07-01 15:55:28
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := minishell
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := being_ready.c free.c m_shell_tree.c minishell.c open_files.c pre_line_check.c redirection.c set_env.c tree_parser.c executor/build_in_p1.c executor/build_in_p2.c executor/execute.c executor/init_exec_elems.c executor/utils.c
+# automatic
+# | := 
+# automatic
+# < := being_ready.c
+# automatic
+# ^ := being_ready.c free.c m_shell_tree.c minishell.c open_files.c pre_line_check.c redirection.c set_env.c tree_parser.c executor/build_in_p1.c executor/build_in_p2.c executor/execute.c executor/init_exec_elems.c executor/utils.c
+# automatic
+# ? := minishell.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  commands to execute (from `Makefile', line 27):
+	@cd libft && make
+	@cd ..
+	@$(CC) $(CFLAGS) $(OBJECTS) -lreadline -o $(NAME) libft/libft.a
+	
+
+bonus:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+set_env.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 08:31:20
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 37):
+	@cd libft && make fclean
+	@cd ../
+	$(RM) $(NAME)
+	
+
+# Not a target:
+free.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-29 08:48:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 32):
+	$(RM) *.o
+	cd libft && make clean
+	cd ../
+	
+
+# Not a target:
+executor/init_exec_elems.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-29 08:48:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+executor/utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-27 14:01:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+minishell.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-01 15:58:48
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+executor/build_in_p1.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-27 14:01:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+m_shell_tree.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-29 08:48:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+redirection.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-01 10:31:27
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# files hash-table stats:
+# Load=24/1024=2%, Rehash=0, Collisions=0/61=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Fri Jul  1 18:30:25 2022
+
+ 

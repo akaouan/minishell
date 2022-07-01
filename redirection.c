@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 18:02:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/29 16:32:04 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/01 10:31:27 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,10 @@ int	cmd_and_args(t_cmd *pipe, int i)
 		i++;
 	i = get_file_name(pipe, i, &word);
 	if (!pipe->cmd)
+	{
+		push_back(&(pipe->args), ft_strdup(word));
 		pipe->cmd = word;
+	}
 	else
 		push_back(&(pipe->args), word);
 	return (i);

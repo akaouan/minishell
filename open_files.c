@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:09:49 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/29 09:34:16 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:45:54 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	open_input(t_cmd *pipe)
 				printf("****8%d**\n", i);
 				close (pipe->inputs[i]);
 			}
-			printf("oo %d\n", i);
 			break ;
 		}
 		i++;
