@@ -6,7 +6,7 @@
 #    By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 13:12:15 by ael-hayy          #+#    #+#              #
-#    Updated: 2022/06/09 15:42:09 by ael-hayy         ###   ########.fr        #
+#    Updated: 2022/07/01 16:04:22 by ael-hayy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,3 +59,15 @@ rec(scrept)
 	while (j < number of child)
 		rec(scrept->next[j]);
 }
+
+
+
+
+
+
+echo "$"HOME
+
+<<$HOME
+> $HOME
+AddressSanitizer:DEADLYSIGNAL
+> <<ok <<|

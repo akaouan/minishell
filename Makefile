@@ -6,7 +6,7 @@
 #    By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 17:25:48 by ael-hayy          #+#    #+#              #
-#    Updated: 2022/06/10 16:32:13 by ael-hayy         ###   ########.fr        #
+#    Updated: 2022/07/01 15:54:00 by ael-hayy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 RM = rm -f
 NAME = minishell
-FILES = *c
+FILES = *c  ./executor/*c
 
 OBJECTS = $(FILES:.c=.o)
 

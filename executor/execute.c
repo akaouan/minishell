@@ -56,11 +56,11 @@ int	check_build_in(t_exec_elems *elems)
 		cmd_pwd(elems->data);
 		return (1);
 	}
-	else if (!ft_strncmp(elems->data->cmd->cmd, "echo", 4))
-	{
-		cmd_echo(elems->args + 1);
-		return (1);
-	}
+	// else if (!ft_strncmp(elems->data->cmd->cmd, "echo", 4))
+	// {
+	// 	cmd_echo(elems->args + 1);
+	// 	return (1);
+	// }
 	return(0);
 }
 
