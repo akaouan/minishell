@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <sys/wait.h>
 
 typedef struct n_exec_elems{
 	char	*cmd_path;
