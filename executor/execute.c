@@ -66,10 +66,13 @@ int	check_build_in(t_exec_elems *elems)
 
 void	execute(t_exec_elems *elems)
 {
-	int	id;
+	int	id = 0;
 
 	if (check_build_in(elems))
+	{
+		elems->cmd_index++;
 		return ;
+	}
 	id = fork();
 	if (!id)
 		set_cmd(elems);
