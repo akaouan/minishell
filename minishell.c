@@ -18,16 +18,9 @@ void	execution(t_prior *data, t_exec_elems *elems)
 	int j = 0;
 	if (!data->numofchilds)
 	{
-		// int i = 0;
-		// while(data->cmd->args[i])
-		// {
-			// printf("[%s]", data->cmd->args[0]);
-		//
 		update_elems(elems, data);
 		execute(elems);
-		// printf("[%d] in: %d, out: %d\n", elems->cmd_index, elems->data->cmd->read_from[0], elems->data->cmd->write_to[0]);
 		update_pipes(elems->pipes, elems->p2);
-		// elems->cmd_index++;
 		return ;
 	}
 	while (j < data->numofchilds)
@@ -74,6 +67,7 @@ int main(int ac, char **av, char **env)
 		close_pipes(elems->pipes);
 		wait_pids(elems);
 		// free_tree(script);
+		free_exec_elems(elems);
 		free(script);
 		free (line);
    }

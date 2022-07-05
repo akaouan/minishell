@@ -9,11 +9,6 @@ void	swap(int *a, int *b)
 	*b = tmp;
 }
 
-void	wr_error(int fd, char *err_msg)
-{
-	ft_putstr_fd(err_msg, fd);
-}
-
 void	wait_pids(t_exec_elems *elems)
 {
 	int	i;
@@ -46,7 +41,7 @@ char	*get_cmd_path(char *cmd, char *env_values)
 		free(cmd_path);
 	}
 	free(paths);
-	wr_error(2, "Couldn't found command\n");
+	ft_putstr_fd("Couldn't found command\n", STDERR_FILENO);
 	return (NULL);
 }
 
@@ -58,6 +53,6 @@ int	get_path_index(char **env_vars)
 	while (env_vars[++i])
 		if (!ft_strncmp(env_vars[i], "PATH", 4))
 			return (i);
-	wr_error(2, "Couldn't found path variable\n");
+	ft_putstr_fd("Couldn't found path variable\n", STDERR_FILENO);
 	return (-1);
 }

@@ -18,7 +18,7 @@ void	update_pipes(int **pipes, int to_close)
 	close(pipes[to_close][1]);
 	if (pipe(pipes[to_close]) == -1)
 	{
-		wr_error(STDERR_FILENO, "Faild to open pipes\n");
+		ft_putstr_fd("Faild to open pipes\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -27,12 +27,12 @@ void	set_cmd(t_exec_elems *elems)
 {
 	if (dup2(elems->cmd_output, STDOUT_FILENO) == -1)
 	{
-		wr_error(STDERR_FILENO, "Faild to duplicate fd\n");
+		ft_putstr_fd("Faild to duplicate fd\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	if (dup2(elems->cmd_input, STDIN_FILENO) == -1)
 	{
-		wr_error(STDERR_FILENO, "Faild to duplicate fd\n");
+		ft_putstr_fd("Faild to duplicate fd\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	close_pipes(elems->pipes);
@@ -45,15 +45,15 @@ int	check_build_in(t_exec_elems *elems)
 	{
 		if (!elems->args[1])
 		{
-			wr_error(STDERR_FILENO, "bash: cd: HOME not set\n");
+			ft_putstr_fd("bash: cd: HOME not set\n", STDERR_FILENO);
 			return (1);
 		}
-		cmd_cd(elems->args);
+		// cmd_cd(elems->args);
 		return (1);
 	}
 	else if (!ft_strncmp(elems->data->cmd->cmd, "pwd", 3))
 	{
-		cmd_pwd(elems->data);
+		// cmd_pwd(elems->data);
 		return (1);
 	}
 	else if (!ft_strncmp(elems->data->cmd->cmd, "echo", 4))

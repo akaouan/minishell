@@ -25,7 +25,7 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 		elems->cmd_path = init_cmd_path(elems->data);
 	if (elems->size <= 1)
 		return ;
-	if (elems->cmd_index > 0 && elems->cmd_index < elems->size - 1)
+	else if (elems->cmd_index > 0 && elems->cmd_index < elems->size - 1)
 	{
 		if (elems->cmd_input < 2)
 			elems->cmd_input = elems->pipes[elems->p1][0];
@@ -33,16 +33,10 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 			elems->cmd_output = elems->pipes[elems->p2][1];
 		swap(&elems->p1, &elems->p2);
 	}
-	else if (!elems->cmd_index)
-	{
-		if (elems->cmd_output < 2)
+	else if (!elems->cmd_index && elems->cmd_output < 2)
 			elems->cmd_output = elems->pipes[elems->p1][1];
-	}
-	else
-	{
-		if (elems->cmd_input < 2)
+	else if (elems->cmd_input < 2)
 			elems->cmd_input = elems->pipes[elems->p1][0];
-	}
 }
 
 
@@ -58,14 +52,10 @@ int	init_pipes(int **pipes)
 			return (0);
 		if (pipe(pipes[i]) == -1)
 		{
-			wr_error(STDERR_FILENO, "Faild to open pipes\n");
+			ft_putstr_fd("Faild to open pipes\n", STDERR_FILENO);
 			exit(EXIT_FAILURE);
 		}
 	}
-	// printf("--------- pipes fd: ---------\n");
-	// for(int i = 0; i < 2; i++)
-	// printf("pipe in: %d\npipe out: %d\n", pipes[i][0], pipes[i][1]);
-	// printf("-----------------------------\n");
 	return (1);
 }
 
@@ -80,7 +70,7 @@ void	init_exec_elems(t_exec_elems **elems, t_prior *data, int size)
 			|| !(*elems)->pids || !(*elems)->pipes
 				|| !init_pipes((*elems)->pipes))
 	{
-		wr_error(STDERR_FILENO, "Faild to allocate memory\n");
+		ft_putstr_fd("Faild to allocate memory\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	(*elems)->i_pid = 0;
