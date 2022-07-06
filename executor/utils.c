@@ -56,3 +56,8 @@ int	get_path_index(char **env_vars)
 	ft_putstr_fd("Couldn't found path variable\n", STDERR_FILENO);
 	return (-1);
 }
+
+void	free_exec_elems(t_exec_elems *elems)
+{
+	
+}

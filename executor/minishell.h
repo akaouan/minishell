@@ -37,6 +37,13 @@ typedef struct n_exec_elems{
 	int		cmd_output;
 }	t_exec_elems;
 
+
+typedef struct n_env{
+	char	**vars;
+	char	**values;
+	char	*pwd;
+}	t_env;
+
 void	wr_error(int fd, char *err_msg);
 void	execute(t_exec_elems *elems);
 void	wait_pids(t_exec_elems *elems);
