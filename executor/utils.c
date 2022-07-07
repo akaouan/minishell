@@ -57,7 +57,14 @@ int	get_path_index(char **env_vars)
 	return (-1);
 }
 
-void	free_exec_elems(t_exec_elems *elems)
+int	arr_len(char **arr)
 {
-	
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return (0);
+	while (arr[i])
+		i++;
+	return (i);
 }

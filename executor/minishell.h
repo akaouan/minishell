@@ -22,7 +22,16 @@
 # include <sys/uio.h>
 # include <sys/wait.h>
 
+typedef struct n_env{
+	char	**vars;
+	char	**values;
+	char	*pwd;
+	char	**env;
+}	t_env;
+
 typedef struct n_exec_elems{
+	t_prior	*data;
+	t_env	*env_elems;
 	char	*cmd_path;
 	char	**args;
 	int		**pipes;
@@ -31,23 +40,17 @@ typedef struct n_exec_elems{
 	int		p1;
 	int		p2;
 	int		size;
-	t_prior	*data;
 	int		cmd_index;
 	int		cmd_input;
 	int		cmd_output;
+
 }	t_exec_elems;
-
-
-typedef struct n_env{
-	char	**vars;
-	char	**values;
-	char	*pwd;
-}	t_env;
 
 void	wr_error(int fd, char *err_msg);
 void	execute(t_exec_elems *elems);
 void	wait_pids(t_exec_elems *elems);
-void	init_exec_elems(t_exec_elems **elems, t_prior *data, int size);
+void	init_exec_elems(t_exec_elems **elems, t_prior *data
+			, t_env *env_elems, int size);
 void	update_elems(t_exec_elems *elems, t_prior *data);
 char	*get_cmd_path(char *cmd, char *env_values);
 int		get_path_index(char **env_vars);
@@ -58,4 +61,8 @@ void    cmd_cd(char **args);
 void    cmd_pwd(t_prior *data);
 void    cmd_echo(int fd_output, char **args);
 void	free_exec_elems(t_exec_elems *elems);
+void	init_env(t_env **env_elems, char **env);
+char	**get_env_values(char **env, int env_size);
+char	**get_env_vars(char **env, int env_size);
+int		arr_len(char **arr);
 #endif

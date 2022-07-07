@@ -1,15 +1,15 @@
 #include "minishell.h"
 
-char *init_cmd_path(t_prior *data)
+char *init_cmd_path(t_exec_elems *elems, char *cmd)
 {
 	char	*cmd_path;
 	int		path_index;
 
-	path_index = get_path_index(data->cmd->env_var);
+	path_index = get_path_index(elems->env_elems->vars);
 	if (path_index == -1)
 		return (NULL);
 	cmd_path = get_cmd_path(ft_strjoin(ft_strdup("/"),
-		data->cmd->cmd), data->cmd->env_valuue[path_index]);
+		cmd), elems->env_elems->values[path_index]);
 	return (cmd_path);
 }
 
@@ -22,7 +22,7 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 	if (elems->data->cmd->cmd[0] == '/' || elems->data->cmd->cmd[0] == '.')
 		elems->cmd_path = elems->data->cmd->cmd;
 	else
-		elems->cmd_path = init_cmd_path(elems->data);
+		elems->cmd_path = init_cmd_path(elems, data->cmd->cmd);
 	if (elems->size <= 1)
 		return ;
 	else if (elems->cmd_index > 0 && elems->cmd_index < elems->size - 1)
@@ -38,7 +38,6 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 	else if (elems->cmd_input < 2)
 			elems->cmd_input = elems->pipes[elems->p1][0];
 }
-
 
 int	init_pipes(int **pipes)
 {
@@ -59,7 +58,8 @@ int	init_pipes(int **pipes)
 	return (1);
 }
 
-void	init_exec_elems(t_exec_elems **elems, t_prior *data, int size)
+void	init_exec_elems(t_exec_elems **elems, t_prior *data
+			, t_env *env_elems, int size)
 {
 	if (!size)
 		size++;
@@ -81,4 +81,5 @@ void	init_exec_elems(t_exec_elems **elems, t_prior *data, int size)
 	(*elems)->data = data;
 	(*elems)->args = NULL;
 	(*elems)->cmd_path = NULL;
+	(*elems)->env_elems = env_elems;
 }

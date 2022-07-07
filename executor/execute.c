@@ -36,7 +36,7 @@ void	set_cmd(t_exec_elems *elems)
 		exit(EXIT_FAILURE);
 	}
 	close_pipes(elems->pipes);
-	execve(elems->cmd_path, elems->args, NULL);
+	execve(elems->cmd_path, elems->args, elems->env_elems->env);
 }
 
 int	check_build_in(t_exec_elems *elems)
