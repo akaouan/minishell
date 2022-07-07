@@ -15,12 +15,13 @@ char *init_cmd_path(t_exec_elems *elems, char *cmd)
 
 void	update_elems(t_exec_elems *elems, t_prior *data)
 {
-	elems->data = data;
 	elems->cmd_input = data->cmd->read_from[0];
 	elems->cmd_output = data->cmd->write_to[0];
-	elems->args = elems->data->cmd->args;
-	if (elems->data->cmd->cmd[0] == '/' || elems->data->cmd->cmd[0] == '.')
-		elems->cmd_path = elems->data->cmd->cmd;
+	elems->args = data->cmd->args;
+	if (data->cmd->cmd[0] == '/' || data->cmd->cmd[0] == '.')
+		elems->cmd_path = data->cmd->cmd;
+	else if (check_build_in(elems))
+		elems->cmd_index++;
 	else
 		elems->cmd_path = init_cmd_path(elems, data->cmd->cmd);
 	if (elems->size <= 1)
@@ -77,8 +78,8 @@ void	init_exec_elems(t_exec_elems **elems, t_prior *data
 	(*elems)->cmd_index = 0;
 	(*elems)->p1 = 0;
 	(*elems)->p2 = 1;
+	(*elems)->build_in = 0;
 	(*elems)->size = size;
-	(*elems)->data = data;
 	(*elems)->args = NULL;
 	(*elems)->cmd_path = NULL;
 	(*elems)->env_elems = env_elems;
