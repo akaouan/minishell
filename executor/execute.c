@@ -48,7 +48,6 @@ int	check_build_in(t_exec_elems *elems)
 			ft_putstr_fd("bash: cd: HOME not set\n", STDERR_FILENO);
 			return (1);
 		}
-		// cmd_cd(elems->args);
 		return (1);
 	}
 	else if (!ft_strncmp(elems->data->cmd->cmd, "pwd", 3))

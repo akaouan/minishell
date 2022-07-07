@@ -57,7 +57,7 @@ int		get_path_index(char **env_vars);
 void	swap(int *a, int *b);
 void	close_pipes(int	**pipes);
 void	update_pipes(int **pipes, int to_close);
-void    cmd_cd(char **args);
+void	cmd_cd(char *pwd, char *path);
 void    cmd_pwd(t_prior *data);
 void    cmd_echo(int fd_output, char **args);
 void	free_exec_elems(t_exec_elems *elems);
