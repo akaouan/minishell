@@ -67,4 +67,5 @@ char	**get_env_values(char **env, int env_size);
 char	**get_env_vars(char **env, int env_size);
 int		arr_len(char **arr);
 int		check_build_in(t_exec_elems *elems);
+void	cmd_env(t_exec_elems *elems);
 #endif

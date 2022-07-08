@@ -22,8 +22,6 @@ void	execution(t_prior *data, t_exec_elems *elems)
 		if (!elems->build_in)
 			execute(elems);
 		update_pipes(elems->pipes, elems->p2);
-		printf("%s\n", *elems->env_elems->pwd);
-		printf("%s\n", *elems->env_elems->old_pwd);
 		return ;
 	}
 	while (j < data->numofchilds)

@@ -55,13 +55,19 @@ int	check_build_in(t_exec_elems *elems)
 	}
 	else if (!ft_strncmp(elems->args[0], "pwd", 3))
 	{
-		// cmd_pwd(elems->data);
+		ft_putstr_fd(elems->env_elems->pwd[0], elems->cmd_output);
 		elems->build_in = 1;
 		return (1);
 	}
 	else if (!ft_strncmp(elems->args[0], "echo", 4))
 	{
 		cmd_echo(elems->cmd_output, elems->args + 1);
+		elems->build_in = 1;
+		return (1);
+	}
+	else if (!ft_strncmp(elems->args[0], "env", 4))
+	{
+		cmd_env(elems);
 		elems->build_in = 1;
 		return (1);
 	}
