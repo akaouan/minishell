@@ -36,6 +36,13 @@ void	set_cmd(t_exec_elems *elems)
 		exit(EXIT_FAILURE);
 	}
 	close_pipes(elems->pipes);
+		if (elems->cmd_output > 2)
+			close(elems->cmd_output);
+		if (elems->cmd_input > 2)
+		{
+			printf("close in\n");
+			close(elems->cmd_input);
+		}
 	execve(elems->cmd_path, elems->args, elems->env_elems->env);
 }
 
@@ -46,6 +53,8 @@ void	execute(t_exec_elems *elems)
 	id = fork();
 	if (!id)
 		set_cmd(elems);
+	if (elems->cmd_output > 2)
+		close(elems->cmd_output);
 	elems->cmd_index++;
 	elems->pids[elems->i_pid++] = id;
 }

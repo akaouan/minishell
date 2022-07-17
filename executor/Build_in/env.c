@@ -9,6 +9,7 @@ void	cmd_env(t_exec_elems *elems)
 	{
 		ft_putstr_fd(((t_var_val *)(env_list->content))->var ,
 			elems->cmd_output);
+			
 		ft_putstr_fd(((t_var_val *)(env_list->content))->value ,
 			elems->cmd_output);
 		ft_putchar_fd('\n', elems->cmd_output);

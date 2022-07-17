@@ -7,8 +7,10 @@ t_var_val *add_var_val(char *var_val)
 	elem = malloc(sizeof(t_var_val));
 	if (!elem)
 		return (NULL);
-	if (ft_strrchr(var_val, '=') + 1 != '\0')
+	if (*(ft_strrchr(var_val, '=') + 1) != '\0')
 		elem->value = ft_strdup(ft_strrchr(var_val, '=') + 1);
+	else
+		elem->value = ft_strdup("\0");
 	elem->var = ft_substr(var_val, 0, get_index(var_val, '=') + 1);
 	return (elem);
 }

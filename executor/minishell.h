@@ -21,7 +21,6 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
-# include <unistd.h>
 
 
 typedef struct n_var_val{
