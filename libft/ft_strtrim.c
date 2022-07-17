@@ -10,17 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
-
-static	int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 static	char	*concat(int start, int end, char *p, const	char *s1)
 {
@@ -69,7 +59,7 @@ char	*ft_strtrim(const char *s1, char const *set)
 		return (NULL);
 	while (check(set, s1[start]))
 		start++;
-	if (start == ft_strlen(s1))
+	if (start == (int)ft_strlen(s1))
 	{
 		p = malloc(sizeof(char) * 1);
 		p[0] = '\0';

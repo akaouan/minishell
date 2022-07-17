@@ -9,6 +9,7 @@
 /*   Updated: 2021/11/14 21:20:39 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include"libft.h"
 
 static	char	*concat(char *p, long save_n, int last_num, int sign)

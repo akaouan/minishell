@@ -9,6 +9,7 @@
 /*   Updated: 2021/11/16 23:59:53 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static	int	calc_strings(const char *s, char c)
