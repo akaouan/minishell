@@ -3,34 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 11:32:18 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/22 15:33:14 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/11 01:09:52 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/15 11:44:42 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-static void	print_num(char a, int fd)
-{
-	write(fd, &a, 1);
-}
+#include<unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else if (n < 0)
+	char		number;
+	long int	num;
+
+	num = n;
+	if (num < 0)
 	{
-		print_num(('-'), fd);
-		n = n * -1;
-		ft_putnbr_fd(n, fd);
+		num *= -1;
+		write(fd, "-", 1);
 	}
-	else if (n < 10)
-		print_num((n + '0'), fd);
-	else
-	{
-		ft_putnbr_fd((n / 10), fd);
-		print_num((n % 10 + '0'), fd);
-	}
+	if (num >= 10)
+		ft_putnbr_fd(num / 10, fd);
+	number = (num % 10) + '0';
+	write(fd, &number, 1);
 }

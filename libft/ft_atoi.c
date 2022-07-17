@@ -3,36 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 16:56:04 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/22 14:04:47 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/08 18:34:20 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/14 21:17:16 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
-	int	n;
-	int	s;
+	int	number;
+	int	sign;
+	int	i;
 
-	n = 0;
-	s = 1;
-	while (*str == ' ' || *str == '\n' || *str == '\t' || *str == '\r'
-		|| *str == '\v' || *str == '\f')
-		str++;
-	if (*str == '-' && ft_isdigit(*(str + 1)))
+	i = 0;
+	sign = 1;
+	number = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		s = -1;
-		str++;
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
-	else if (*str == '+' && ft_isdigit(*(str + 1)))
-		str++;
-	while (ft_isdigit(*str))
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		n *= 10;
-		n += *str - '0';
-		str++;
+		number = number * 10 + (str[i] - '0');
+		i++;
 	}
-	return (n * s);
+	return (number * sign);
 }

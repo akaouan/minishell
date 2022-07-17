@@ -23,7 +23,7 @@ void	rm_back(char *str)
 			str[i] = '\0';
 }
 
-void	cmd_cd(char **old_pwd, char **pwd, char *path)
+void	cmd_cd(t_var_val *old_pwd, t_var_val *pwd, char *path)
 {
 	rm_back(path);
 	if(chdir(path) == -1)
@@ -35,15 +35,15 @@ void	cmd_cd(char **old_pwd, char **pwd, char *path)
 	}
 	if (!ft_strncmp(path, "..", 2))
 	{
-		free(*old_pwd);
-		*old_pwd = ft_strdup(*pwd);
-		*pwd = ft_substr(*pwd, 0, get_last_char(*pwd, '/'));
+		free(old_pwd->value);
+		old_pwd->value = ft_strdup(pwd->value);
+		pwd->value = ft_substr(pwd->value, 0, get_last_char(pwd->value, '/'));
 	}
 	else
 	{
 		path = ft_strjoin(ft_strdup("/"), path);
-		free(*old_pwd);
-		*old_pwd = ft_strdup(*pwd);
-		*pwd = ft_strjoin(*pwd, path);
+		free(old_pwd->value);
+		old_pwd->value = ft_strdup(pwd->value);
+		pwd->value = ft_strjoin(pwd->value, path);
 	}
 }

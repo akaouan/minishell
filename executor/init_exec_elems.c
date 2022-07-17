@@ -1,15 +1,29 @@
-#include "minishell.h"
+   #include "minishell.h"
+/*!!!!*/
 
 char *init_cmd_path(t_exec_elems *elems, char *cmd)
 {
 	char	*cmd_path;
-	int		path_index;
+	char	*path;
+	t_list	*env_list;
 
-	path_index = get_path_index(elems->env_elems->vars);
-	if (path_index == -1)
+	env_list = elems->env_elems->env_list;
+	path = NULL;
+	while (env_list)
+	{
+		if (!ft_strncmp(((t_var_val *)env_list->content)->var
+				, "PATH", 4))
+		{
+			path = ((t_var_val *)env_list->content)->value;
+			break;
+		}
+		else
+			env_list = env_list->next;
+	}
+	if (!path)
 		return (NULL);
 	cmd_path = get_cmd_path(ft_strjoin(ft_strdup("/"),
-		cmd), elems->env_elems->values[path_index]);
+		cmd), path);
 	return (cmd_path);
 }
 
@@ -56,12 +70,14 @@ int	init_pipes(int **pipes)
 			exit(EXIT_FAILURE);
 		}
 	}
+	
 	return (1);
 }
 
-void	init_exec_elems(t_exec_elems **elems, t_prior *data
+void	init_exec_elems(t_exec_elems **elems
 			, t_env *env_elems, int size)
 {
+
 	if (!size)
 		size++;
 	*elems = malloc(sizeof(t_exec_elems));

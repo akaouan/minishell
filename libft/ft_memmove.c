@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 09:09:18 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/22 14:30:24 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/17 00:15:28 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/17 00:15:32 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t		i;
-	char		*dest;
-	char		*source;
-
-	dest = (char *)dst;
-	source = (char *)src;
-	i = 0;
-	if (!dest && !source)
-		return (NULL);
-	if (source < dest)
-		while (++i <= len)
-			dest[len - i] = source[len - i];
+	if (dst == 0 && src == 0)
+		return (0);
+	if (src < dst)
+	{
+		while (len--)
+			((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
+		return (dst);
+	}
 	else
-		while (++i <= len)
-			dest[i - 1] = source[i - 1];
-	return ((void *)dest);
+		return (ft_memcpy(dst, src, len));
 }

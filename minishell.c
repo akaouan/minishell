@@ -65,7 +65,7 @@ int main(int ac, char **av, char **env)
 		}
 		script = m_shell_parser(line);
 		tree_parser(script, env);
-		init_exec_elems(&elems, script, env_elems, script->numofchilds);
+		init_exec_elems(&elems, env_elems, script->numofchilds);
 		execution(script, elems);
 		close_pipes(elems->pipes);
 		wait_pids(elems);

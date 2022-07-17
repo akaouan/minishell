@@ -3,34 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 09:06:28 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/25 10:27:04 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/11 00:27:04 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/17 18:18:14 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, int start, size_t len)
-{
-	size_t		a;
-	char		*p;
-	size_t		n;
+static	char	*alloc_back(char *s)
+{	
+	s = malloc(sizeof(char) * 1);
+	s[0] = '\0';
+	return (s);
+}
 
-	a = 0;
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	size;
+	size_t	i;
+	char	*p;
+
+	size = 0;
+	i = 0;
+	p = NULL;
 	if (!s)
 		return (NULL);
-	if (ft_strlen((char *)s) < start)
-		return (((char *)ft_calloc(1, 1)));
-	n = ft_strlen((char *)s + start);
-	if (n > len)
-		n = len;
-	p = (char *)malloc(n + 1);
+	if (start >= ft_strlen(s))
+	{
+		p = alloc_back(p);
+		return (p);
+	}
+	while (size < len && s[size])
+		size++;
+	p = malloc(sizeof(char) * size + 1);
 	if (!p)
 		return (NULL);
-	while (a++ < n)
-		p[a - 1] = s[start + a - 1];
-	p[a - 1] = '\0';
+	while (i < size)
+		p[i++] = s[start++];
+	p[i] = '\0';
 	return (p);
 }

@@ -3,54 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 15:05:02 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/25 10:27:42 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/11 00:55:50 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/15 11:41:51 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include<stdlib.h>
 
-static	int	test(char c, char const *set)
+static	int	ft_strlen(const char *s)
 {
 	int	i;
 
 	i = 0;
-	while (set[i])
+	while (s[i])
+		i++;
+	return (i);
+}
+
+static	char	*concat(int start, int end, char *p, const	char *s1)
+{
+	int	j;
+
+	j = 0;
+	while (start <= end)
+		p[j++] = s1[start++];
+	p[j] = '\0';
+	return (p);
+}
+
+static	int	check(const char *s1, const char set)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i])
 	{
-		if (c == set[i])
+		if (s1[i] == set)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+static	int	get_end(const char *s1, const char *set)
 {
-	int		i;
-	int		k;
-	int		j;
-	int		len;
-	char	*arr;
+	int	end;
 
-	if (s1 == NULL || set == NULL)
+	end = ft_strlen(s1) - 1;
+	while (check(set, s1[end]))
+		end--;
+	return (end);
+}
+
+char	*ft_strtrim(const char *s1, char const *set)
+{
+	int		start;
+	int		end;
+	char	*p;
+
+	end = 0;
+	start = 0;
+	if (s1 == NULL)
 		return (NULL);
-	len = ft_strlen((char *)s1);
-	i = 0;
-	j = 0;
-	k = -1;
-	while (test(s1[i], set))
-		i++;
-	if (i == len)
-		return (ft_calloc(1, 1));
-	while (test(s1[len - (j + 1)], set))
-		j++;
-	arr = (char *)malloc(sizeof(char) * (len + 1) - (i + j));
-	if (!arr)
-		return (NULL);
-	while ((++k) < (len - (i + j)))
-	arr[k] = s1[k + i];
-	arr[k] = '\0';
-	return (arr);
+	while (check(set, s1[start]))
+		start++;
+	if (start == ft_strlen(s1))
+	{
+		p = malloc(sizeof(char) * 1);
+		p[0] = '\0';
+		return (p);
+	}
+	else
+	{
+		end = get_end(s1, set);
+		p = malloc(sizeof(char) * (end - start) + 2);
+		if (!p)
+			return (NULL);
+		concat(start, end, p, s1);
+		return (p);
+	}
 }

@@ -2,13 +2,16 @@
 
 void	cmd_env(t_exec_elems *elems)
 {
-	int i;
+	t_list	*env_list;
 
-	i = -1;
-	while (elems->env_elems->vars[++i])
+	env_list = elems->env_elems->env_list;
+	while (env_list)
 	{
-		ft_putstr_fd(elems->env_elems->vars[i], elems->cmd_output);
-		ft_putstr_fd(elems->env_elems->values[i], elems->cmd_output);
+		ft_putstr_fd(((t_var_val *)(env_list->content))->var ,
+			elems->cmd_output);
+		ft_putstr_fd(((t_var_val *)(env_list->content))->value ,
+			elems->cmd_output);
 		ft_putchar_fd('\n', elems->cmd_output);
+		env_list = env_list->next;
 	}
 }

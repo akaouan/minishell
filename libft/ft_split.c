@@ -3,93 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 20:24:36 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/23 11:57:20 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/16 23:59:49 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/16 23:59:53 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static char	*allocate(char const *s, char c)
+static	int	calc_strings(const char *s, char c)
 {
-	int		j;
-	char	*p;
+	int	i;
+	int	strings;
+	int	sign;
 
-	j = 0;
-	while (s[j] != '\0' && s[j] != c)
-		j++;
-	p = (char *)malloc((j + 1) * sizeof(char));
-	if (!p)
-		return (NULL);
-	p[j] = '\0';
-	while (j > 0)
+	sign = 0;
+	i = 0;
+	strings = 0;
+	while (s[i])
 	{
-		p[j - 1] = s[j - 1];
-		j--;
+		while (s[i] == c)
+			i++;
+		while (s[i] != c && s[i])
+		{
+			sign++;
+			i++;
+		}
+		if (sign > 0)
+			strings++;
+		sign = 0;
 	}
-	return (p);
+	return (strings);
 }
 
-static int	hmw(char const *s, char c)
+static	int	chars_counter(const char *s, int i, char c)
 {
-	int	j;
+	int	len;
+
+	len = 0;
+	while (s[i] != c && s[i] != '\0')
+	{
+		len++;
+		i++;
+	}
+	return (len);
+}
+
+static	void	*fr_ee(char **strings, int j)
+{
+	while (j--)
+		free(strings[j]);
+	free(strings);
+	return (NULL);
+}
+
+static	char	**ending(const char *s, char c, char **p)
+{
 	int	i;
 	int	k;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while (s[j] != '\0')
+	while (j < calc_strings(s, c))
 	{
 		k = 0;
-		while (s[j] != '\0' && s[j] == c)
-			j++;
-		while (s[j] != '\0' && s[j] != c)
-		{
-			j++;
-			k = 1;
-		}
-		if (k == 1)
+		while (s[i] == c)
 			i++;
+		p[j] = malloc(sizeof(char) *(chars_counter(s, i, c) + 1));
+		if (!p[j])
+			return (fr_ee(p, j));
+		while (s[i] != c && s[i] != '\0')
+		{
+			p[j][k++] = s[i];
+			i++;
+		}
+		p[j++][k] = '\0';
 	}
-	return (i);
-}
-
-char	**free_array(char **res, int len)
-{
-	while (len)
-	{
-		free(res[len--]);
-	}
-	free(res);
-	return (NULL);
+	p[j] = 0;
+	return (p);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**splt;
-	int		n;
-	int		j;
+	char	**p;
 
-	n = 0;
-	j = 0;
 	if (!s)
 		return (NULL);
-	splt = (char **)malloc ((hmw(s, c) + 1) * sizeof(char *));
-	if (!splt)
-		return (0);
-	while (s[j] != '\0' )
-	{
-		while (s[j] != '\0' && s[j] == c)
-			j++;
-		if (s[j])
-			splt[n++] = allocate(s + j, c);
-		if (splt[(n - 1)] == NULL)
-			return (free_array(splt, n));
-		while (s[j] != '\0' && s[j] != c)
-			j++;
-	}
-	splt[n] = NULL;
-	return (splt);
+	p = malloc(sizeof(char *) * (calc_strings(s, c) + 1));
+	if (!p)
+		return (NULL);
+	return (ending(s, c, p));
 }

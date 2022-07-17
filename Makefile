@@ -11,10 +11,10 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS = -fsanitize=address -g
 RM = rm -f
 NAME = minishell
-FILES = *c  ./executor/*c
+FILES = *c  ./executor/*c ./executor/Build_in/*c
 
 OBJECTS = $(FILES:.c=.o)
 

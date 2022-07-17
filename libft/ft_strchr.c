@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 13:41:02 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/12 10:30:09 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/03 10:39:36 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/15 11:19:15 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != (char)c)
-		if (!*s++)
-			return (0);
-	return ((char *)s);
+	char	cp;
+
+	cp = c;
+	while (*s)
+	{
+		if (*s == cp)
+		{
+			return ((char *)s);
+		}
+		s++;
+	}
+	if (*s == cp)
+		return ((char *)s);
+	else
+		return (0);
 }

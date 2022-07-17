@@ -20,7 +20,7 @@ void	wait_pids(t_exec_elems *elems)
 		waitpid(elems->pids[i], NULL, 0);
 }
 
-char	*get_cmd_path(char *cmd, char *env_values)
+char	*get_cmd_path(char *cmd, char *path_value)
 {
 	int		i;
 	char	*cmd_path;
@@ -28,7 +28,7 @@ char	*get_cmd_path(char *cmd, char *env_values)
 
 	i = -1;
 	cmd_path = NULL;
-	paths = ft_split(env_values, ':');
+	paths = ft_split(path_value, ':');
 	while (paths[++i])
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);

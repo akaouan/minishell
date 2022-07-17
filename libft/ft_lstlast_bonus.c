@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 10:43:20 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/21 15:25:36 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/17 16:50:56 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/17 16:51:13 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst != NULL)
+	int	i;
+	int	lst_len;
+
+	lst_len = ft_lstsize(lst) - 1;
+	i = 0;
+	if (lst == NULL)
+		return (lst);
+	else
 	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
+		while (i < lst_len)
+		{
+			lst = lst->next;
+			i++;
+		}
 	}
 	return (lst);
 }

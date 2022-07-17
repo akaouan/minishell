@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hayy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 11:23:27 by ael-hayy          #+#    #+#             */
-/*   Updated: 2021/11/24 09:51:24 by ael-hayy         ###   ########.fr       */
+/*   Created: 2021/11/11 01:08:39 by akaouan           #+#    #+#             */
+/*   Updated: 2021/11/11 23:07:41 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include<unistd.h>
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	char	n;
-
-	if (!s)
-		return ;
-	n = '\n';
-	while (*s != '\0')
+	if (s != NULL)
 	{
-		write(fd, s, 1);
-		s++;
+		while (*s)
+			write(fd, s++, 1);
+		write(fd, "\n", 1);
 	}
-	write(fd, &n, 1);
 }

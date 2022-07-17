@@ -11,51 +11,41 @@ int	get_index(char *str, char c)
 	return (0);
 }
 
-char	**get_env_values(char **env, int env_size)
+t_var_val	*get_pwd(t_list *elem, char *to_found)
 {
-	int		i;
-	char	**values;
-
-	i = -1;
-	values = malloc(sizeof(char *) * (env_size + 1));
-	if (!values)
+	while (elem)
 	{
-		ft_putstr_fd("Faild to allocate memory\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);			
+		if (!ft_strncmp(((t_var_val *)(elem->content))->var,
+				to_found, ft_strlen(to_found)))
+			return ((t_var_val *)elem->content);
+		else
+			elem = elem->next;
 	}
-	while (++i < env_size)
-		values[i] = ft_strdup(ft_strchr(env[i], '=') + 1);
-	values[i] = NULL;
-	return (values);
+	return (NULL);
 }
 
-char	**get_env_vars(char **env, int env_size)
+t_var_val	*get_var_value(char *env)
 {
-	int		i;
-	char	**vars;
+	t_var_val	*elem;
 
-	i = -1;	
-	vars = malloc(sizeof(char *) * (env_size + 1));
-	if (!vars)
+	elem = malloc(sizeof(t_var_val));
+	if (!elem)
 	{
 		ft_putstr_fd("Faild to allocate memory\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);			
+		exit(EXIT_FAILURE);		
 	}
-	while (++i < env_size)
-		vars[i] = ft_substr(env[i], 0, get_index(env[i], '=') + 1);
-	vars[i] = NULL;
-	return (vars);
+	elem->value = ft_strdup(ft_strchr(env, '=') + 1);
+	elem->var = ft_substr(env, 0, get_index(env, '=') + 1);
+	return (elem);
 }
 
-char	**get_pwd(char **vars, char **values, char *to_found)
+void	init_env_list(t_list **env_list, char **env, int size)
 {
-	int	i;
+	int i;
 
 	i = -1;
-	while (vars[++i])
-		if (!ft_strncmp(vars[i], to_found, 3))
-			break ;
-	return (values + i);
+	while (++i < size)
+		ft_lstadd_back(env_list, ft_lstnew(get_var_value(env[i])));
 }
 
 void	init_env(t_env **env_elems, char **env)
@@ -64,14 +54,14 @@ void	init_env(t_env **env_elems, char **env)
 
 	env_size = arr_len(env);
 	*env_elems = malloc(sizeof(t_env));
+	(*env_elems)->env_list = NULL;
 	if (!(*env_elems))
 	{
 		ft_putstr_fd("Faild to allocate memory\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);		
 	}
-	(*env_elems)->values = get_env_values(env, env_size);
-	(*env_elems)->vars = get_env_vars(env, env_size);
-	(*env_elems)->pwd = get_pwd((*env_elems)->vars, (*env_elems)->values, "PWD");
-	(*env_elems)->old_pwd = get_pwd((*env_elems)->vars, (*env_elems)->values, "OLDPWD");
+	init_env_list(&(*env_elems)->env_list, env, env_size);
+	(*env_elems)->pwd = get_pwd((*env_elems)->env_list, "PWD");
+	(*env_elems)->old_pwd = get_pwd((*env_elems)->env_list, "OLDPWD");
 	(*env_elems)->env = env;
 }
