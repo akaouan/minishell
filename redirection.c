@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 18:02:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/01 10:31:27 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:33:37 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,21 @@ void	free_db_str(char **str)
 		free(str[i]);
 		i++;
 	}
+	free(str[i]);
 	free(str);
+}
+
+void	free_db_int(int **intg, int num)
+{
+	int	i;
+
+	i = 0;
+	while (i < num)
+	{
+		free(intg[i]);
+		i++;
+	}
+	free(intg);
 }
 
 void	push_back(char	***stack, char *word)
@@ -115,6 +129,9 @@ int	redirectinp(t_cmd *pipe, int i)
 	while (pipe->line[i] && pipe->line[i] == ' ')
 		i++;
 	i = get_file_name(pipe, i, &file_name);
+	file_name = remove_quotes_str(file_name, pipe, 1);
+	if (pipe->read_from[0] == -1)
+		return (-1);
 	pipe->inputs_num[0] += 1;
 	if (access(file_name, F_OK) == -1)
 	{
@@ -126,7 +143,6 @@ int	redirectinp(t_cmd *pipe, int i)
 		printf("monosholo: %s:  permission denied:\n", file_name);
 		return (-1);
 	}
-	printf("::::::::::\n");
 	push_back(&(pipe->filesin), file_name);
 	return (i);
 }
@@ -141,6 +157,9 @@ int	redirectappend(t_cmd *pipe, int i)
 	while (pipe->line[i] && pipe->line[i] == ' ')
 		i++;
 	i = get_file_name(pipe, i, &file_name);
+	file_name = remove_quotes_str(file_name, pipe, 1);
+	if (pipe->read_from[0] == -1)
+		return (-1);
 	pipe->append_num[0] += 1;
 	j = 0;
 	f = 0;
@@ -186,6 +205,9 @@ int redirectout(t_cmd *pipe, int i)
 	while (pipe->line[i] && pipe->line[i] == ' ')
 		i++;
 	i = get_file_name(pipe, i, &file_name);
+	file_name = remove_quotes_str(file_name, pipe, 1);
+	if (pipe->read_from[0] == -1)
+		return (-1);
 	pipe->outputs_num[0] += 1;
 	j = 0;
 	f = 0;
@@ -217,7 +239,6 @@ int redirectout(t_cmd *pipe, int i)
 		printf("monosholo: %s: permission denied\n", file_name);
 		return (-1);
 	}
-	//printf("AZAZAZ\n");
 	push_back(&(pipe->filesout), file_name);
 	return (i);
 }

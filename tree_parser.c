@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:49:57 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/29 16:31:50 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:32:36 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,34 @@ char *rm_dollar(char *str, char c)
 	int		j;
 	char	*tem;
 
-	j = untill_char(&str[1], c) + 1;
+	j = untill_char(str, c);
 	tem = ft_substr(str, 0, j + 1);
+	return (tem);
+}
+
+char	*variable_i(char *tem, t_cmd *pipe, int f)
+{
+	int	j;
+
+	tem = get_valuue(tem, pipe);
+	j = 0;
+	if (tem)
+		while (tem[j])
+		{
+			if (tem[j] == ' ' && f)
+			{
+				pipe->read_from[0] = -1;
+				write(2, "ambiguous redirect\n", 19);
+				return (tem);
+			}
+			j++;
+		}
+	else if (!tem && f)
+	{
+		pipe->read_from[0] = -1;
+		write(2, "ambiguous redirect\n", 19);
+		return (tem);
+	}
 	return (tem);
 }
 
@@ -154,30 +180,25 @@ char *variable(char *str, t_cmd *pipe, int f)
 		j++;
 	}
 	tem[j] = '\0';
-	tem = get_valuue(tem, pipe);
-	//printf("siuhcdihdihdciu  %s\n", tem);
-	j = 0;
-	if (tem)
-		while (tem[j])
-		{
-			if (tem[j] == ' ' && f)
-			{
-				pipe->read_from[0] = -1;
-				write(2, "ambiguous redirect\n", 19);
-				return (tem);
-			}
-			j++;
-		}
-	else if (!tem && f)
-	{
-		pipe->read_from[0] = -1;
-		write(2, "ambiguous redirect\n", 19);
-		return (tem);
-	}
-	return (tem);   // ! continueee
+	return (variable_i(tem, pipe, f));   // ! continueee
 }
 
 int	untill_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			i += next_qoute(&str[i ], str[i]);
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+int	untill_char_v(char *str, char c)
 {
 	int	i;
 	int	k;
@@ -188,19 +209,15 @@ int	untill_char(char *str, char c)
 	{
 		if (str[i] == '\"')
 		{
-			//printf("^^;;\n");
 			if (!k)
 				k = 1;
 			else
 				k = 0;
+			if (i == 0)
+				i++;
 		}
 		if (str[i] == '\'' && !k)
-		{
-			//printf("::::::::::::::[ %s ]\n", &str[i]);
-			i += next_qoute(&str[i ], '\'');
-			//printf("::::::::::::::[ %s ]\n", &str[i]);
-			//exit(0);
-		}
+			i += next_qoute(&str[i ], str[i]);
 		if (str[i] == c)
 			return (i);
 		i++;
@@ -211,12 +228,12 @@ int	untill_char(char *str, char c)
 int	after_var(char *str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	if (str[i] == '\'' || str[i] == '"')
+	{
 		return (next_qoute(str, str[0]) + 2);
+	}
 	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '_'))
 		i++;
 	i++;
@@ -231,8 +248,7 @@ char	*change_vall(char *str,char *var)
 	char	*tem_tw;
 
 	tem_t = str;
-	//printf("std befor:   %s\n", str);
-	j = untill_char(str, '$');
+	j = untill_char_v(str, '$');
 	tem = ft_substr(str, 0, j);
 	j += after_var(&str[j + 1]);
 	tem_tw = ft_substr(str, j, ft_strlen(str));
@@ -246,7 +262,6 @@ char	*change_vall(char *str,char *var)
 	if (tem_tw)
 		free(tem_tw);
 	free(tem_t);
-	//printf("std after:   %s\n", str);
 	return (str);
 }
 
@@ -260,10 +275,8 @@ char	*get_val(char *str, t_cmd *pipe, int j, int f)
 	k = 0;
 	while (str[i])
 	{
-		//printf("{%s }\n", &str[i]);
 		if (str[i] == '\"')
 		{
-			//printf("^^\n");
 			if (!k)
 				k = 1;
 			else
@@ -271,25 +284,24 @@ char	*get_val(char *str, t_cmd *pipe, int j, int f)
 		}
 		if (j)
 			if (str[i] == '\'' && !k)
-			{
-				//printf("::::::::::::::[ %s ]\n", &str[i]);
 				i += next_qoute(&str[i ], '\'');
-				//printf("::::::::::::::[ %s ]\n", &str[i]);
-				//exit(0);
-			}
 		if (str[i] == '$')
 		{
-			printf("PPPPP   %s\n", &str[i]);
+			if (i != 0 && str[i - 1] == '"' && str[i + 1] == '"')
+			{
+			}
+			else
+			{
 			tem_tw = variable(&str[i + 1], pipe, f);
 			if (f == 1 && !tem_tw)
 			{
-				//printf("getval\n");
 				pipe->read_from[0] = -1;
 				write(2, "ambiguous redirect\n", 19);
 				return (0);
 			}
 			str = change_vall(str, tem_tw);
 			i--;
+			}
 		}
 		i++;
 	}
@@ -343,7 +355,7 @@ char	*remove_quotes_str(char *str, t_cmd *pipe, int f)
 	if (pipe->read_from[0] == -1)
 		return (0);
 	if (no_quote_found(str))
-		return (ft_strdup(str));
+		return (str);
 	len = len_without_quotes(str);
 	new_str = malloc(sizeof(char) * len + 1);
 	i = 0;
@@ -397,11 +409,16 @@ char	**remove_quotes(char **str, t_cmd *pipe, int f)
 	{
 		new_str[i] = remove_quotes_str(str[i], pipe, f);
 		if (pipe->read_from[0] == -1)
-			return (0); //! free here
+		{
+			free(new_str[i]);
+			free(new_str);
+			free(str);
+			return (0);
+		}
 		i++;
 	}
 	new_str[i] = 0;
-	free(str); // ! free here
+	free(str);
 	return (new_str);
 }
 
@@ -409,15 +426,6 @@ int	process_quotes(t_cmd *pipe)
 {
 	pipe->cmd = remove_quotes_str(pipe->cmd, pipe, 0);
 	pipe->args = remove_quotes(pipe->args, pipe, 0);
-	pipe->filesin = remove_quotes(pipe->filesin, pipe, 1);
-	if (pipe->read_from[0] == -1)
-		return -1;
-	pipe->filesout = remove_quotes(pipe->filesout, pipe, 1);
-	if (pipe->read_from[0] == -1)
-		return -1;
-	pipe->files_appends = remove_quotes(pipe->files_appends, pipe, 1);
-	if (pipe->read_from[0] == -1)
-		return -1;
 	return (0);
 }
 

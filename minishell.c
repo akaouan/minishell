@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:09 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/01 15:58:48 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:41:53 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,11 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	while (1)
 	{
-		line = readline("\033[0;32minishell-2.0$> \033[0m");
-		if (!line  || line[0] == '\0')
+		line = readline("\033[0;32mmonosholo-2.0$> \033[0m");
+		// if (line && line[0])
+		// 	add_history(line);
+		if (!line)
 		{
-			if (line && line[0] == '\0')
-			{
-				free(line);
-				continue ;
-			}
 			write(1, "\n", 1);
 			continue ;
 		}
@@ -68,19 +65,9 @@ int main(int ac, char **av, char **env)
 		init_exec_elems(&elems, env_elems, script->numofchilds);
 		execution(script, elems);
 		close_pipes(elems->pipes);
-		if (elems->cmd_output > 2)
-			close(elems->cmd_output);
-		if (elems->cmd_input > 2)
-		{
-			printf("close in %d\n", elems->cmd_input);
-			close(elems->cmd_input);
-		}
 		wait_pids(elems);
-		// free_tree(script);
-		// free_exec_elems(elems);
+		free_tree(script);
 		free(script);
 		free (line);
    }
 }
-
-// !  #0 0x10355ae8b in len_without_quotes tree_parser.c:44

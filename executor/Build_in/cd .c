@@ -8,7 +8,7 @@ int	get_last_char(char *pwd, char c)
 	i = -1;
 	last_char = 0;
 	while (pwd[++i])
-		if (pwd[i] == '/')
+		if (pwd[i] == c)
 			last_char = i;
 	return (last_char);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:37:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/29 09:26:04 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:09:34 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,6 @@ int			untill_char(char *str, char c);
 char	*change_vall(char *str,char *var);
 char *variable(char *str, t_cmd *pipe, int f);
 char		*get_next_line(void);
+void	free_db_int(int **intg, int num);
+char	*variable_i(char *tem, t_cmd *pipe, int f);
 #endif

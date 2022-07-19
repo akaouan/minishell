@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:09:49 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/29 20:45:54 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 15:17:50 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ void	open_her_doc(t_cmd *pip)
 		if (no_quote_found(pip->her_limit[i]))
 		{
 			get_herdoc(pip, 1, pip->her_limit[i]);
+			close(pip->fd[1]);
 		}
 		else
 		{
 			pip->her_limit[i] = remove_quotes_str(pip->her_limit[i], pip, 0);
 			get_herdoc(pip, 2, pip->her_limit[i]);
+			close(pip->fd[1]);
 		}
 		i++;
 	}
@@ -117,20 +119,14 @@ void	open_input(t_cmd *pipe)
 			pipe->A[0] = -1;
 			printf("monosholo: %s:permission denied or file doesnt exitst\n", pipe->filesin[i]);
 			while (i-- > 0)
-			{
-				printf("****8%d**\n", i);
 				close (pipe->inputs[i]);
-			}
 			break ;
 		}
 		i++;
 	}
 	i--;
 	while (i-- > 0)
-	{
-		printf("****8%d**\n", pipe->inputs[i]);
 		close (pipe->inputs[i]);
-	}
 	pipe->A[0] = 1;
 }
 void	open_append(t_cmd *pipe)
@@ -175,6 +171,7 @@ void	read_write(t_cmd *pipe)
 }
 
 
+
 void	files_open(t_cmd *pipe)
 {
 	if (pipe->read_from[0] != -1)
@@ -185,5 +182,7 @@ void	files_open(t_cmd *pipe)
 	open_input(pipe);
 	open_append(pipe);
 	read_write(pipe);
+	if (!pipe->cmd)
+		pipe->read_from[0] = -1;
 	}
 }

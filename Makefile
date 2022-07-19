@@ -6,12 +6,12 @@
 #    By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 17:25:48 by ael-hayy          #+#    #+#              #
-#    Updated: 2022/07/01 15:54:00 by ael-hayy         ###   ########.fr        #
+#    Updated: 2022/07/17 11:08:57 by ael-hayy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g
 RM = rm -f
 NAME = minishell
 FILES = *c  ./executor/*c ./executor/Build_in/*c

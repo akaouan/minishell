@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/06/28 12:06:26 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:43:43 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ int	all_space(char *line)
 	int	i;
 
 	i = 0;
+	if (line[0] == '"')
+	{
+		if (line[1] == '"')
+			if (line[2] == '\0')
+			{
+				printf("minishell: : command not found\n");
+				return (0);
+			}
+	}
 	while (line[i])
 	{
 		if (line[i] != ' ')
@@ -39,25 +48,6 @@ int next_qoute(char *line, char c)
 	}
 	return (-1);
 }
-
-// int check_parentheses(char *line)
-// {
-// 	int i;
-// 	int j;
-// 	int k;
-
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	while (line[i] == ' ')
-// 		i++;
-// 	while(line[i])
-// 	{
-// 		i++;
-
-// 	}
-// }
-
 
 int check_parentheses(char *line)
 {
@@ -230,12 +220,12 @@ int	revcheck(char *line)
 			i = rev_next_quote(line, i, line[i]);
 		if (line[i] == '|' || line[i] == '&')
 		{
-			if (i == ft_strlen(line) - 1)
+			if (i == (int)ft_strlen(line) - 1)
 				return (1);
 			else
 			{
 				k = i + 1;
-				while (k < ft_strlen(line))
+				while (k < (int)ft_strlen(line))
 				{
 					if (line[k] == ' ')
 					{
@@ -252,7 +242,7 @@ int	revcheck(char *line)
 					else
 						break ;
 				}
-				if (k == ft_strlen(line) - 1 && line[k] == ' ')
+				if (k == (int)ft_strlen(line) - 1 && line[k] == ' ')
 					return (1);
 			}
 			if (line[i - 1] == '|' || line[i - 1] == '&')
@@ -266,30 +256,10 @@ int	revcheck(char *line)
 int	check_dir(char *line)
 {
 	int	i;
-	int	j;
-	int	k;
 
-	j = 0;
-	k = 0;
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '<')
-			j++;
-		else if (line[i] == '>')
-			k++;
-		else if(line[i] != ' ')
-		{
-			k = 0;
-			j = 0;
-		}
-		if (j > 2 || k > 2)
-		{
-			write(2, ">$ syntax error near unexpected token `", 40);
-			write(2, &line[i], 1);
-			write(2, "'\n", 2);
-			return (1);
-		}
 		if (line[i] == '<')
 		{
 			i++;
@@ -362,6 +332,7 @@ int pre_check_line(char *line)
 	if (check_parentheses(line) || check_andor(line)
 			|| revcheck(line) || check_dir(line))
 	{
+		write(2, ">$ syntax error unexpected token \n", 34);
 		return (1);
 	}
 	return (0);
