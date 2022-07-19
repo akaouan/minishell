@@ -18,10 +18,11 @@ void	execution(t_prior *data, t_exec_elems *elems)
 	int j = 0;
 	if (!data->numofchilds)
 	{
-		update_elems(elems, data);
-		if (!elems->build_in)
-			execute(elems);
-		update_pipes(elems->pipes, elems->p2);
+		printf("%s\n", data->operator[0]);
+		// update_elems(elems, data);
+		// if (!elems->build_in)
+		// 	execute(elems);
+		// update_pipes(elems->pipes, elems->p2);
 		return ;
 	}
 	while (j < data->numofchilds)
@@ -43,8 +44,8 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		line = readline("\033[0;32mmonosholo-2.0$> \033[0m");
-		// if (line && line[0])
-		// 	add_history(line);
+		if (line && line[0])
+			add_history(line);
 		if (!line)
 		{
 			write(1, "\n", 1);

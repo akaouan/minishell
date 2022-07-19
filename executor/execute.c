@@ -46,8 +46,6 @@ void	execute(t_exec_elems *elems)
 	id = fork();
 	if (!id)
 		set_cmd(elems);
-	if (elems->cmd_output > 2)
-		close(elems->cmd_output);
 	elems->cmd_index++;
 	elems->pids[elems->i_pid++] = id;
 }
