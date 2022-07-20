@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:09:49 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 15:17:50 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/19 13:12:08 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,27 @@ void	get_herdoc(t_cmd *pipe, int j, char *limit)
 		}
 		free(line);		
 	}
-	
 }
 
+int	open_her_doc_i(t_cmd *pip, int i)
+{
+	if (pip->lastout[0] == 1)
+	{
+		if (pip->fd[0])
+		{
+			close(pip->fd[0]);
+			close(pip->fd[1]);
+		}
+		pipe(pip->fd);
+	}
+	if (no_quote_found(pip->her_limit[i]))
+	{
+		get_herdoc(pip, 1, pip->her_limit[i]);
+		close(pip->fd[1]);
+		return (0);
+	}
+	return (1);
+}
 void	open_her_doc(t_cmd *pip)
 {
 	int	i;
@@ -51,21 +69,7 @@ void	open_her_doc(t_cmd *pip)
 		pip->fd = malloc(sizeof(int) * 2);
 	while (pip->her_limit[i])
 	{
-		if (pip->lastout[0] == 1)
-		{
-			if (pip->fd[0])
-			{
-				close(pip->fd[0]);
-				close(pip->fd[1]);
-			}
-			pipe(pip->fd);
-		}
-		if (no_quote_found(pip->her_limit[i]))
-		{
-			get_herdoc(pip, 1, pip->her_limit[i]);
-			close(pip->fd[1]);
-		}
-		else
+		if (open_her_doc_i(pip, i))
 		{
 			pip->her_limit[i] = remove_quotes_str(pip->her_limit[i], pip, 0);
 			get_herdoc(pip, 2, pip->her_limit[i]);
@@ -86,11 +90,12 @@ void	open_output(t_cmd *pipe)
 	pipe->outputs = malloc(strsnums(pipe->filesout) * sizeof(int));
 	while (pipe->filesout[i])
 	{
-		pipe->outputs[i] = open(pipe->filesout[i], O_RDWR | O_CREAT ,0642);
+		pipe->outputs[i] = open(pipe->filesout[i], O_WRONLY);
 		if (pipe->outputs[i] == -1)
 		{
 			pipe->A[0] = -1;
 			printf("monosholo: %s:permission denied\n", pipe->filesout[i]);
+			pipe->read_from[0] = - 1;
 			while (i-- > 0)
 				close (pipe->outputs[i]);
 			break ;
@@ -113,7 +118,7 @@ void	open_input(t_cmd *pipe)
 	pipe->inputs = malloc(strsnums(pipe->filesin) * sizeof(int));
 	while (pipe->filesin[i])
 	{
-		pipe->inputs[i] = open(pipe->filesin[i], O_RDWR,0642);
+		pipe->inputs[i] = open(pipe->filesin[i], O_RDONLY);
 		if (pipe->inputs[i] == -1)
 		{
 			pipe->A[0] = -1;
@@ -139,11 +144,12 @@ void	open_append(t_cmd *pipe)
 	pipe->appends = malloc(strsnums(pipe->files_appends) * sizeof(int));
 	while (pipe->files_appends[i])
 	{
-		pipe->appends[i] = open(pipe->files_appends[i], O_RDWR | O_CREAT | O_APPEND,0642);
+		pipe->appends[i] = open(pipe->files_appends[i], O_RDWR | O_CREAT | O_APPEND);
 		if (pipe->appends[i] == -1)
 		{
 			pipe->A[0] = -1;
 			printf("monosholo: %s:permission denied or file doesnt exitst\n", pipe->files_appends[i]);
+			pipe->read_from[0] = -1;
 			while (i-- > 0)
 				close (pipe->appends[i]);
 			break ;
@@ -176,13 +182,13 @@ void	files_open(t_cmd *pipe)
 {
 	if (pipe->read_from[0] != -1)
 	{
-	pipe->A = malloc(sizeof(int));
-	open_her_doc(pipe);
-	open_output(pipe);
-	open_input(pipe);
-	open_append(pipe);
-	read_write(pipe);
-	if (!pipe->cmd)
-		pipe->read_from[0] = -1;
+		pipe->A = malloc(sizeof(int));
+		open_her_doc(pipe);
+		open_output(pipe);
+		open_input(pipe);
+		open_append(pipe);
+		read_write(pipe);
+		if (!pipe->cmd)
+			pipe->read_from[0] = -1;
 	}
 }

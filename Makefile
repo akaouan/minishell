@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 RM = rm -f
 NAME = minishell
 FILES = *c  ./executor/*c ./executor/Build_in/*c
@@ -24,7 +24,7 @@ OBJECTS = $(FILES:.c=.o)
 all:  $(NAME)
 
 $(NAME): $(OBJECTS)
-	@cd libft && make
+	@cd libft && make && make bonus
 	@cd ..
 	@$(CC) $(CFLAGS) $(OBJECTS) -lreadline -o $(NAME) libft/libft.a
 

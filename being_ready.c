@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:44:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 17:27:14 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/19 12:15:59 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_srtuct_bzero(t_cmd *pipe)
 {
-
 	pipe->write_to = 0;
 	pipe->A = 0;
 	pipe->line = 0;

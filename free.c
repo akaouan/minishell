@@ -12,27 +12,8 @@
 
 
 #include "parser.h"
-
-void	cmd_free(t_cmd *cmd)
+void	cmd_free_i(t_cmd *cmd)
 {
-	if (cmd->append_num)
-		free(cmd->append_num);
-	if (cmd->A)
-		free(cmd->A);
-	if (cmd->appends)
-		free(cmd->appends);
-	if (cmd->cmd)
-		free(cmd->cmd);
-	if (cmd->args)
-		free_db_str(cmd->args);
-	if (cmd->env_valuue)
-		free_db_str(cmd->env_valuue);
-	if (cmd->env_var)
-		free_db_str(cmd->env_var);
-	if (cmd->her_limit)
-		free_db_str(cmd->her_limit);
-	if (cmd->files_appends)
-		free_db_str(cmd->files_appends);
 	if (cmd->filesin)
 		free_db_str(cmd->filesin);
 	if (cmd->filesout)
@@ -59,14 +40,35 @@ void	cmd_free(t_cmd *cmd)
 		free(cmd->inputs_num);
 }
 
-void	free_tree(t_prior *script)
+void	cmd_free(t_cmd *cmd)
 {
-	int	i;
+	if (cmd->append_num)
+		free(cmd->append_num);
+	if (cmd->A)
+		free(cmd->A);
+	if (cmd->appends)
+		free(cmd->appends);
+	if (cmd->cmd)
+		free(cmd->cmd);
+	if (cmd->args)
+		free_db_str(cmd->args);
+	if (cmd->env_valuue)
+		free_db_str(cmd->env_valuue);
+	if (cmd->env_var)
+		free_db_str(cmd->env_var);
+	if (cmd->her_limit)
+		free_db_str(cmd->her_limit);
+	if (cmd->files_appends)
+		free_db_str(cmd->files_appends);
+	cmd_free_i(cmd);
+}
+
+int	free_tree_i(t_prior *script)
+{
 	int	j;
 
-	i = script->numofchilds;
 	j = 0;
-	if (i == 0)
+	if (script->numofchilds == 0)
 	{
 		while (script->slices && script->slices[j])
 		{
@@ -77,7 +79,7 @@ void	free_tree(t_prior *script)
 		free(script->slices);
 		cmd_free(script->cmd);
 		free(script->cmd);
-		return ;
+		return (1);
 	}
 	j = 0;
 	while (script->operator && script->operator[j])
@@ -86,6 +88,16 @@ void	free_tree(t_prior *script)
 		j++;
 	}
 	free(script->operator[j]);
+	free(script->operator);
+	return (0);
+}
+
+void	free_tree(t_prior *script)
+{
+	int	j;
+
+	if (free_tree_i(script))
+		return ;
 	j= 0;
 	while (script->slices && script->slices[j])
 	{
@@ -94,15 +106,14 @@ void	free_tree(t_prior *script)
 	}
 	free(script->slices[j]);
 	free(script->slices);
-	free(script->operator);
 	j = 0;
-	while (j < i)
+	while (j < script->numofchilds)
 	{
 		free_tree(script->next[j]);
 		j++;
 	}
 	j = 0;
-	while (j < i)
+	while (j < script->numofchilds)
 	{
 		free(script->next[j]);
 		j++;

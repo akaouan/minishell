@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 18:02:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 17:33:37 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 18:48:49 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,7 @@ int	redirectinp(t_cmd *pipe, int i)
 int	redirectappend(t_cmd *pipe, int i)
 {
 	char	*file_name;
-	char	*var;
 	int		j;
-	int		f;
 	i += 2;
 	while (pipe->line[i] && pipe->line[i] == ' ')
 		i++;
@@ -161,36 +159,14 @@ int	redirectappend(t_cmd *pipe, int i)
 	if (pipe->read_from[0] == -1)
 		return (-1);
 	pipe->append_num[0] += 1;
-	j = 0;
-	f = 0;
-	while (file_name[j])
-	{
-		if (file_name[j] == '"' && !f)
-			f++;
-		else if (file_name[j] == '"' && f)
-			f--;
-		if (f == 0 && file_name[j] == '\'')
-			j += next_qoute(&file_name[j+1], '\'');
-		if(file_name[j] == '$')
-		{
-			var = variable(&file_name[j + 1], pipe, 1);
-			if (!var)
-			{
-				pipe->read_from[0] = -1;
-				write(2, "ambiguous redirect\n", 19);
-				return(-1);
-			}
-			file_name = change_vall(file_name, var);
-			break;
-		}
-		j++;
-	}
-	j = open(file_name, O_RDWR | O_CREAT ,0642);
+	j = open(file_name, O_RDWR | O_CREAT, 0777);
 	if (j == -1)
 	{
 		printf("monosholo: %s: permission denied\n", file_name);
+		pipe->read_from[0] = -1;
 		return (-1);
 	}
+	close(j);
 	push_back(&(pipe->files_appends), file_name);
 	return (i);
 }
@@ -198,9 +174,8 @@ int	redirectappend(t_cmd *pipe, int i)
 int redirectout(t_cmd *pipe, int i)
 {
 	char	*file_name;
-	char	*var;
 	int		j;
-	int		f;
+	
 	i++;
 	while (pipe->line[i] && pipe->line[i] == ' ')
 		i++;
@@ -209,36 +184,14 @@ int redirectout(t_cmd *pipe, int i)
 	if (pipe->read_from[0] == -1)
 		return (-1);
 	pipe->outputs_num[0] += 1;
-	j = 0;
-	f = 0;
-	while (file_name[j])
-	{
-		if (file_name[j] == '"' && !f)
-			f++;
-		else if (file_name[j] == '"' && f)
-			f--;
-		if (f == 0 && file_name[j] == '\'')
-			j += next_qoute(&file_name[j+1], '\'');
-		if(file_name[j] == '$')
-		{
-			var = variable(&file_name[j + 1], pipe, 1);
-			if (!var)
-			{
-				pipe->read_from[0] = -1;
-				write(2, "ambiguous redirect\n", 19);
-				return(-1);
-			}
-			file_name = change_vall(file_name, var);
-			break;
-		}
-		j++;
-	}
-	j = open(file_name, O_RDWR | O_CREAT ,0642);
+	j = open(file_name, O_RDWR | O_CREAT, 0777);
 	if (j == -1)
 	{
-		printf("monosholo: %s: permission denied\n", file_name);
+		printf("monosholo: %s: {}{}{}{}{}permission denied\n", file_name);
+		pipe->read_from[0] = -1;
 		return (-1);
 	}
+	close(j);
 	push_back(&(pipe->filesout), file_name);
 	return (i);
 }
@@ -260,38 +213,48 @@ int	cmd_and_args(t_cmd *pipe, int i)
 	return (i);
 }
 
-int	redirections(t_cmd *pipe)
+int	iterate_i(t_cmd *pipe, int *i)
+{
+	if (pipe->line[*i] == '<' && pipe->line[*i + 1] == '<')
+	{
+		pipe->lastout[0] = 1;
+		*i = her_doc(pipe, *i);
+		if (*i == -1)
+			return (-1);
+		return (1);
+	}
+	else if (pipe->line[*i] == '<'  && pipe->line[*i + 1] != '<')
+	{
+		pipe->lastout[0] = 2;
+		*i = redirectinp(pipe, *i);
+		if (*i == -1)
+			return (-1);
+		return (1);
+	}
+	else if (pipe->line[*i] == '>' && pipe->line[*i + 1] == '>')
+	{
+		pipe->lastin[0] = 1;
+		*i = redirectappend(pipe, *i);
+		if (*i == -1)
+			return (-1);
+		return (1);
+	}
+	return (0);
+}
+
+int	iterate(t_cmd *pipe)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	pipe->lastout = malloc(sizeof(int));
-	pipe->lastin = malloc(sizeof(int));
-	pipe->lastout[0] = 0;
-	pipe->lastin[0] = 0;
 	while (pipe->line[i])
 	{
-		if (pipe->line[i] == '<' && pipe->line[i + 1] == '<')
-		{
-			pipe->lastout[0] = 1;
-			i = her_doc(pipe, i);
-			if (i == -1)
-				return (-1);
-		}
-		else if (pipe->line[i] == '<'  && pipe->line[i + 1] != '<')
-		{
-			pipe->lastout[0] = 2;
-			i = redirectinp(pipe, i);
-			if (i == -1)
-				return (-1);
-		}
-		else if (pipe->line[i] == '>' && pipe->line[i + 1] == '>')
-		{
-			pipe->lastin[0] = 1;
-			i = redirectappend(pipe, i);
-			if (i == -1)
-				return (-1);
-		}
+		j = iterate_i(pipe, &i);
+		if (j == -1)
+			return (-1);
+		else if (j == 1)
+			continue;
 		else if (pipe->line[i] == '>' && pipe->line[i + 1] != '>')
 		{
 			pipe->lastin[0] = 2;
@@ -304,8 +267,18 @@ int	redirections(t_cmd *pipe)
 		else if (pipe->line[i] == ' ')
 			i++;
 	}
-	if (process_quotes(pipe) == -1)
+	return (0);
+}
+
+int	redirections(t_cmd *pipe)
+{
+	pipe->lastout = malloc(sizeof(int));
+	pipe->lastin = malloc(sizeof(int));
+	pipe->lastout[0] = 0;
+	pipe->lastin[0] = 0;
+	if (iterate(pipe) == -1)
 		return (-1);
+	process_quotes(pipe);
 	files_open(pipe);
 	return (1);
 }

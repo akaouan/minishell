@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:37:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 17:09:34 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/19 13:36:36 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ char	*change_vall(char *str,char *var);
 char *variable(char *str, t_cmd *pipe, int f);
 char		*get_next_line(void);
 void	free_db_int(int **intg, int num);
+void	check_dir_ii(char c);
 char	*variable_i(char *tem, t_cmd *pipe, int f);
 #endif

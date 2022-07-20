@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:09 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 17:41:53 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/19 12:08:51 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,28 @@
 
 void	execution(t_prior *data, t_exec_elems *elems)
 {
-	int j = 0;
-	if (!data->numofchilds)
+	int j;
+	int	i;
+
+	j = 0;
+	i = data->numofchilds;
+	if (i == 0)
+		return ;
+	while (j < i)
 	{
-		printf("%s\n", data->operator[0]);
+		printf("%d\n", data->cmd->write_to[0]);
 		// update_elems(elems, data);
 		// if (!elems->build_in)
 		// 	execute(elems);
 		// update_pipes(elems->pipes, elems->p2);
-		return ;
+		j++;
 	}
-	while (j < data->numofchilds)
-		execution(data->next[j++], elems);
+	j = 0;
+	while(j < i)
+	{
+		execution(data->next[j], elems);
+		j++;
+	}
 }
 
 int main(int ac, char **av, char **env)

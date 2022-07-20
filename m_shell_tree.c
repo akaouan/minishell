@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 13:33:33 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 15:19:55 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/19 13:01:39 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,25 +332,11 @@ char *clear_it(char *slice)
 	free (slice);
 	return (line);
 }
-t_prior*    m_shell_parser(char *line)
-{
-	char    **slices;
-	t_prior *script = 0;
-	int     i;
 
-	script = malloc(sizeof(t_prior));
-	check_malloc(script, 0, 1);
-	slices = ft_split_pro(line, &script->operator);
-	script->numofchilds = strsnums(slices);
-	script->line = line;
-	script->slices = slices;
-	if (strsnums(slices) == 1)
-	{
-		i = 0;
-		script->numofchilds = 0;
-		return (script);
-	}
-	script->next = malloc(sizeof(t_prior *) * strsnums(slices));
+void	m_shell(char **slices, t_prior *script)
+{
+	int	i;
+
 	i = 0;
 	while (slices[i])
 	{
@@ -364,5 +350,25 @@ t_prior*    m_shell_parser(char *line)
 		script->next[i] = m_shell_parser(slices[i]);
 		i++;
 	}
+}
+
+t_prior*    m_shell_parser(char *line)
+{
+	char    **slices;
+	t_prior *script = 0;
+
+	script = malloc(sizeof(t_prior));
+	check_malloc(script, 0, 1);
+	slices = ft_split_pro(line, &script->operator);
+	script->numofchilds = strsnums(slices);
+	script->line = line;
+	script->slices = slices;
+	if (strsnums(slices) == 1)
+	{
+		script->numofchilds = 0;
+		return (script);
+	}
+	script->next = malloc(sizeof(t_prior *) * strsnums(slices));
+	m_shell(slices, script);
 	return (script);
 }

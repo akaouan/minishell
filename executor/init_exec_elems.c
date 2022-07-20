@@ -41,9 +41,8 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 			elems->cmd_output = elems->pipes[elems->p2][1];
 		swap(&elems->p1, &elems->p2);
 	}
-	else if (elems->size > 1
-		&& !elems->cmd_index && elems->cmd_output < 2)
-			elems->cmd_output = elems->pipes[elems->p1][1];
+	else if (elems->size > 1 && !elems->cmd_index && elems->cmd_output < 2)
+		elems->cmd_output = elems->pipes[elems->p1][1];
 	else if (elems->size > 1 && elems->cmd_input < 2)
 			elems->cmd_input = elems->pipes[elems->p1][0];
 	if (data->cmd->cmd[0] == '/' || data->cmd->cmd[0] == '.')

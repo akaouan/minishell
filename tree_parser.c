@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:49:57 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 17:32:36 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/18 19:18:50 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,30 @@ char	*change_vall(char *str,char *var)
 	return (str);
 }
 
+char	*get_val_i(char *str, int f, int *i, t_cmd *pipe)
+{
+	char *tem_tw;
+
+	tem_tw = 0;
+	if (*i != 0 && str[*i - 1] == '"' && str[*i + 1] == '"')
+	{
+	}
+	else
+	{
+	tem_tw = variable(&str[*i + 1], pipe, f);
+	if (f == 1 && !tem_tw)
+	{
+		pipe->read_from[0] = -1;
+		write(2, "ambiguous redirect\n", 19);
+		*i = -1;
+		return (0);
+	}
+	str = change_vall(str, tem_tw);
+	(*i)--;
+	}
+	return (tem_tw);
+}
+
 char	*get_val(char *str, t_cmd *pipe, int j, int f)
 {
 	int		i;
@@ -287,6 +311,10 @@ char	*get_val(char *str, t_cmd *pipe, int j, int f)
 				i += next_qoute(&str[i ], '\'');
 		if (str[i] == '$')
 		{
+	// 		tem_tw =  get_val_i(str, f, &i, pipe);// heeere
+	// printf("LL%d\n",i);
+	// 		if (i == -1)
+	// 			return (0);
 			if (i != 0 && str[i - 1] == '"' && str[i + 1] == '"')
 			{
 			}
@@ -342,6 +370,35 @@ void	ft_concat(char *str1, char *str2, int *j)
 	free(str2);
 }
 
+void	remove_quotes_str_i(char *str, char *new_str, int *j, int *i)
+{
+	if (str[*i] == '\'')
+	{
+		(*i)++;
+		while (str[*i] != '\'')
+		{
+			new_str[*j] = str[*i];
+			(*j)++;
+			(*i)++;
+		}
+	}
+	else if (str[*i] == '"')
+	{
+		(*i)++;
+		while (str[*i] != '"')
+		{
+			new_str[*j] = str[*i];
+			(*j)++;
+			(*i)++;
+		}
+	}
+	else
+	{
+		new_str[*j] = str[*i];
+		(*j)++;
+	}
+}
+
 char	*remove_quotes_str(char *str, t_cmd *pipe, int f)
 {
 	int		len;
@@ -362,31 +419,7 @@ char	*remove_quotes_str(char *str, t_cmd *pipe, int f)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-		{
-			i++;
-			while (str[i] != '\'')
-			{
-				new_str[j] = str[i];
-				j++;
-				i++;
-			}
-		}
-		else if (str[i] == '"')
-		{
-			i++;
-			while (str[i] != '"')
-			{
-				new_str[j] = str[i];
-				j++;
-				i++;
-			}
-		}
-		else
-		{
-			new_str[j] = str[i];
-			j++;
-		}
+		remove_quotes_str_i(str, new_str, &j, &i);
 		i++;
 	}
 	new_str[j] = '\0';
