@@ -21,16 +21,15 @@ void	execution(t_prior *data, t_exec_elems *elems)
 	j = 0;
 	i = data->numofchilds;
 	if (i == 0)
+	{	
+		update_elems(elems, data);
+		if (!elems->build_in)
+			execute(elems);
+		update_pipes(elems->pipes, elems->p2);
 		return ;
-	while (j < i)
-	{
-		printf("%d\n", data->cmd->write_to[0]);
-		// update_elems(elems, data);
-		// if (!elems->build_in)
-		// 	execute(elems);
-		// update_pipes(elems->pipes, elems->p2);
-		j++;
 	}
+	while (j < i)
+		j++;
 	j = 0;
 	while(j < i)
 	{
@@ -80,5 +79,6 @@ int main(int ac, char **av, char **env)
 		free_tree(script);
 		free(script);
 		free (line);
+		exit(1);
    }
 }

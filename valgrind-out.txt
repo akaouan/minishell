@@ -1,0 +1,1254 @@
+==10248== Memcheck, a memory error detector
+==10248== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10248== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==10248== Command: ./minishell
+==10248== Parent PID: 2207
+==10248== 
+--10248-- 
+--10248-- Valgrind options:
+--10248--    --leak-check=full
+--10248--    --show-leak-kinds=all
+--10248--    --track-origins=yes
+--10248--    --verbose
+--10248--    --log-file=valgrind-out.txt
+--10248-- Contents of /proc/version:
+--10248--   Linux version 5.16.0-kali7-amd64 (devel@kali.org) (gcc-11 (Debian 11.2.0-19) 11.2.0, GNU ld (GNU Binutils for Debian) 2.38) #1 SMP PREEMPT Debian 5.16.18-1kali1 (2022-04-01)
+--10248-- 
+--10248-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--10248-- Page sizes: currently 4096, max supported 4096
+--10248-- Valgrind library directory: /usr/libexec/valgrind
+--10248-- Reading syms from /home/akaouan/Desktop/hamid/minishell/minishell
+--10248-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.33.so
+--10248--   Considering /usr/lib/debug/.build-id/ae/60c7fd6964429befbea7c351f495224659211e.debug ..
+--10248--   .. build-id is valid
+--10248-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--10248--   Considering /usr/lib/debug/.build-id/31/c65bd1926b562e65eb79adb206f0bdb46579be.debug ..
+--10248--   .. build-id is valid
+--10248--    object doesn't have a dynamic symbol table
+--10248-- Scheduler: using generic scheduler lock implementation.
+--10248-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==10248== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-10248-by-akaouan-on-???
+==10248== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-10248-by-akaouan-on-???
+==10248== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-10248-by-akaouan-on-???
+==10248== 
+==10248== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==10248== don't want to do, unless you know exactly what you're doing,
+==10248== or are doing some strange experiment):
+==10248==   /usr/bin/vgdb --pid=10248 ...command...
+==10248== 
+==10248== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==10248==   /path/to/gdb ./minishell
+==10248== and then give GDB the following command
+==10248==   target remote | /usr/bin/vgdb --pid=10248
+==10248== --pid is optional if only one valgrind process is running
+==10248== 
+--10248-- REDIR: 0x4023f60 (ld-linux-x86-64.so.2:strlen) redirected to 0x580badd2 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--10248-- REDIR: 0x4023d40 (ld-linux-x86-64.so.2:index) redirected to 0x580badec (vgPlain_amd64_linux_REDIR_FOR_index)
+--10248-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--10248--   Considering /usr/lib/debug/.build-id/50/4cda609fcbd2cab3cfdd25ed892f8c9c9eb825.debug ..
+--10248--   .. build-id is valid
+--10248-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--10248--   Considering /usr/lib/debug/.build-id/c0/c2166f02c538be09f810ea4d52d4e5a31d7b81.debug ..
+--10248--   .. build-id is valid
+==10248== WARNING: new redirection conflicts with existing -- ignoring it
+--10248--     old: 0x04023f60 (strlen              ) R-> (0000.0) 0x580badd2 vgPlain_amd64_linux_REDIR_FOR_strlen
+--10248--     new: 0x04023f60 (strlen              ) R-> (2007.0) 0x04845920 strlen
+--10248-- REDIR: 0x4020780 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4846780 (strcmp)
+--10248-- REDIR: 0x40244a0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x484a1f0 (mempcpy)
+--10248-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+--10248--    object doesn't have a symbol table
+--10248-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.33.so
+--10248--   Considering /usr/lib/debug/.build-id/3f/d3cdd423a18458d9db3a5e50a2b3c0d4529c07.debug ..
+--10248--   .. build-id is valid
+==10248== WARNING: new redirection conflicts with existing -- ignoring it
+--10248--     old: 0x04949060 (memalign            ) R-> (1011.0) 0x04844be0 memalign
+--10248--     new: 0x04949060 (memalign            ) R-> (1017.0) 0x04844bb0 aligned_alloc
+==10248== WARNING: new redirection conflicts with existing -- ignoring it
+--10248--     old: 0x04949060 (memalign            ) R-> (1011.0) 0x04844be0 memalign
+--10248--     new: 0x04949060 (memalign            ) R-> (1017.0) 0x04844b80 aligned_alloc
+==10248== WARNING: new redirection conflicts with existing -- ignoring it
+--10248--     old: 0x04949060 (memalign            ) R-> (1011.0) 0x04844be0 memalign
+--10248--     new: 0x04949060 (memalign            ) R-> (1017.0) 0x04844bb0 aligned_alloc
+==10248== WARNING: new redirection conflicts with existing -- ignoring it
+--10248--     old: 0x04949060 (memalign            ) R-> (1011.0) 0x04844be0 memalign
+--10248--     new: 0x04949060 (memalign            ) R-> (1017.0) 0x04844b80 aligned_alloc
+--10248-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
+--10248--    object doesn't have a symbol table
+--10248-- REDIR: 0x494d1b0 (libc.so.6:memmove) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+==10248== Preferring higher priority redirection:
+--10248--     old: 0x04a20d10 (__memcpy_avx_unalign) R-> (2018.0) 0x048479d0 __memcpy_avx_unaligned_erms
+--10248--     new: 0x04a20d10 (__memcpy_avx_unalign) R-> (2018.1) 0x04849270 memmove
+--10248-- REDIR: 0x494c620 (libc.so.6:strncpy) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d640 (libc.so.6:strcasecmp) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494bf70 (libc.so.6:strcat) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c6b0 (libc.so.6:rindex) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494ea30 (libc.so.6:rawmemchr) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x4966970 (libc.so.6:wmemchr) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x4966430 (libc.so.6:wcscmp) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d3c0 (libc.so.6:mempcpy) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d120 (libc.so.6:bcmp) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c580 (libc.so.6:strncmp) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c080 (libc.so.6:strcmp) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d2d0 (libc.so.6:memset) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x49663c0 (libc.so.6:wcschr) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c480 (libc.so.6:strnlen) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c1b0 (libc.so.6:strcspn) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d690 (libc.so.6:strncasecmp) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c120 (libc.so.6:strcpy) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d7e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x4967bd0 (libc.so.6:wcsnlen) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x49664a0 (libc.so.6:wcscpy) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c720 (libc.so.6:strpbrk) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c000 (libc.so.6:index) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c410 (libc.so.6:strlen) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x4952e20 (libc.so.6:memrchr) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d6e0 (libc.so.6:strcasecmp_l) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d0b0 (libc.so.6:memchr) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x4966550 (libc.so.6:wcslen) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c840 (libc.so.6:strspn) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d5b0 (libc.so.6:stpncpy) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d520 (libc.so.6:stpcpy) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494eaa0 (libc.so.6:strchrnul) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494d730 (libc.so.6:strncasecmp_l) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494c4f0 (libc.so.6:strncat) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x49c9a20 (libc.so.6:__memcpy_chk) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x494cfe0 (libc.so.6:strstr) redirected to 0x48361b0 (_vgnU_ifunc_wrapper)
+--10248-- REDIR: 0x4a1dbb0 (libc.so.6:__strrchr_avx2) redirected to 0x4845360 (rindex)
+--10248-- REDIR: 0x49482f0 (libc.so.6:malloc) redirected to 0x483f740 (malloc)
+--10248-- REDIR: 0x4a1dd80 (libc.so.6:__strlen_avx2) redirected to 0x4845800 (strlen)
+--10248-- REDIR: 0x4a1f250 (libc.so.6:__strcpy_avx2) redirected to 0x4845950 (strcpy)
+--10248-- REDIR: 0x4a1d9c0 (libc.so.6:__strchrnul_avx2) redirected to 0x4849cf0 (strchrnul)
+--10248-- REDIR: 0x48fcbd0 (libc.so.6:setenv) redirected to 0x484ac30 (setenv)
+--10248-- REDIR: 0x4a1d790 (libc.so.6:__strchr_avx2) redirected to 0x48454e0 (index)
+--10248-- REDIR: 0x4a196e0 (libc.so.6:__strncmp_avx2) redirected to 0x4845ed0 (strncmp)
+--10248-- REDIR: 0x4948bf0 (libc.so.6:realloc) redirected to 0x48447b0 (realloc)
+--10248-- REDIR: 0x4a20d10 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4849270 (memmove)
+--10248-- REDIR: 0x4a20cf0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4849e00 (mempcpy)
+--10248-- REDIR: 0x4a192a0 (libc.so.6:__strcmp_avx2) redirected to 0x4846680 (strcmp)
+--10248-- REDIR: 0x4949110 (libc.so.6:calloc) redirected to 0x4844540 (calloc)
+--10248-- REDIR: 0x4a1df00 (libc.so.6:__strnlen_avx2) redirected to 0x48457a0 (strnlen)
+--10248-- REDIR: 0x4948950 (libc.so.6:free) redirected to 0x4842110 (free)
+--10248-- REDIR: 0x494ccf0 (libc.so.6:__GI_strstr) redirected to 0x484a480 (__strstr_sse2)
+--10248-- REDIR: 0x4a20d00 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x484a2e0 (__memcpy_chk)
+--10248-- REDIR: 0x4a211a0 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4849170 (memset)
+--10248-- REDIR: 0x4a1f5e0 (libc.so.6:__strncpy_avx2) redirected to 0x4845ad0 (strncpy)
+--10248-- REDIR: 0x4a19c00 (libc.so.6:__memchr_avx2) redirected to 0x4846800 (memchr)
+--10248-- REDIR: 0x4a1ff40 (libc.so.6:__stpcpy_avx2) redirected to 0x4848b30 (stpcpy)
+--10248-- REDIR: 0x4a1a770 (libc.so.6:__strcasecmp_avx) redirected to 0x4846050 (strcasecmp)
+--10248-- REDIR: 0x4a1bde0 (libc.so.6:__strncasecmp_avx) redirected to 0x4846110 (strncasecmp)
+--10248-- REDIR: 0x4a1a390 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4848a10 (bcmp)
+==10248== Invalid read of size 1
+==10248==    at 0x10BCE1: check_andor (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10C247: pre_check_line (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A9F0: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Address 0x4b17ae6 is 0 bytes after a block of size 22 alloc'd
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EF37: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48803B2: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10E0C1: remove_quotes_str (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E2BF: process_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE86: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10E0C1: remove_quotes_str (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E206: remove_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E2E3: process_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE86: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10E217: remove_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E2E3: process_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE86: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10B38F: files_open (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE92: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 
+==10248== Process terminating with default action of signal 2 (SIGINT)
+==10248==    at 0x48FAB77: kill (syscall-template.S:120)
+==10248==    by 0x4899731: _rl_signal_handler (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489BCF4: rl_getc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489C600: rl_read_key (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487F99E: readline_internal_char (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488039C: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== HEAP SUMMARY:
+==10248==     in use at exit: 220,082 bytes in 508 blocks
+==10248==   total heap usage: 862 allocs, 354 frees, 296,768 bytes allocated
+==10248== 
+==10248== Searching for pointers to 508 not-freed blocks
+==10248== Checked 249,536 bytes
+==10248== 
+==10248== 2 bytes in 1 blocks are definitely lost in loss record 1 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10F86A: ft_strdup (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E82E: init_cmd_path (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10EA5B: update_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A8BD: execution (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA55: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4 bytes in 1 blocks are still reachable in loss record 2 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10EB69: init_exec_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA42: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8 bytes in 1 blocks are still reachable in loss record 3 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x494C31A: strdup (strdup.c:42)
+==10248==    by 0x4AB5617: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC7F8: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8 bytes in 1 blocks are still reachable in loss record 4 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x48A84AD: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48918AA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 9 bytes in 1 blocks are still reachable in loss record 5 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48FCA6A: __add_to_environ (setenv.c:215)
+==10248==    by 0x484AD4F: setenv (vg_replace_strmem.c:2280)
+==10248==    by 0x48A6731: sh_set_lines_and_columns (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D2EF: _rl_get_screen_size (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891D58: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 12 bytes in 1 blocks are still reachable in loss record 6 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48FCA6A: __add_to_environ (setenv.c:215)
+==10248==    by 0x484AD4F: setenv (vg_replace_strmem.c:2280)
+==10248==    by 0x489D2EF: _rl_get_screen_size (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891D58: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 12 bytes in 1 blocks are still reachable in loss record 7 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x494C31A: strdup (strdup.c:42)
+==10248==    by 0x48F1CBD: _nl_load_locale_from_archive (loadarchive.c:464)
+==10248==    by 0x48F0CD9: _nl_find_locale (findlocale.c:153)
+==10248==    by 0x48F0879: setlocale (setlocale.c:414)
+==10248==    by 0x48A0891: _rl_init_locale (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A0968: _rl_init_eightbit (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800CD: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 12 bytes in 1 blocks are still reachable in loss record 8 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x494C31A: strdup (strdup.c:42)
+==10248==    by 0x48F08BA: setlocale (setlocale.c:431)
+==10248==    by 0x48A0891: _rl_init_locale (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A0968: _rl_init_eightbit (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800CD: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 12 bytes in 1 blocks are still reachable in loss record 9 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A1C17: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A99E: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 13 bytes in 1 blocks are still reachable in loss record 10 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488E132: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800D4: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 13 bytes in 1 blocks are still reachable in loss record 11 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10FB3D: ft_strjoin (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10ED50: get_cmd_path (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E852: init_cmd_path (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10EA5B: update_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A8BD: execution (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA55: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 14 bytes in 1 blocks are still reachable in loss record 12 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x494C31A: strdup (strdup.c:42)
+==10248==    by 0x4AA8DF7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AA911D: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4EF6: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 14 bytes in 1 blocks are still reachable in loss record 13 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x4AA9618: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB12F2: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB541D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB5609: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC7F8: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 15 bytes in 1 blocks are still reachable in loss record 14 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x494C31A: strdup (strdup.c:42)
+==10248==    by 0x4AAC0E3: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 16 bytes in 1 blocks are still reachable in loss record 15 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48801C2: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 16 bytes in 1 blocks are still reachable in loss record 16 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10EB7E: init_exec_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA42: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 16 bytes in 2 blocks are still reachable in loss record 17 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10EA9E: init_pipes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10EBC1: init_exec_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA42: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 20 bytes in 1 blocks are still reachable in loss record 18 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488EEB3: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488DC09: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488E0AC: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800D4: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 22 bytes in 1 blocks are still reachable in loss record 19 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A19CC: alloc_history_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A1C39: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A99E: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 24 bytes in 1 blocks are still reachable in loss record 20 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x49B7669: tsearch (tsearch.c:338)
+==10248==    by 0x48FCA9D: __add_to_environ (setenv.c:231)
+==10248==    by 0x484AD4F: setenv (vg_replace_strmem.c:2280)
+==10248==    by 0x48A6731: sh_set_lines_and_columns (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D2EF: _rl_get_screen_size (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891D58: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 24 bytes in 1 blocks are still reachable in loss record 21 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x49B75DF: tsearch (tsearch.c:338)
+==10248==    by 0x48FCA9D: __add_to_environ (setenv.c:231)
+==10248==    by 0x484AD4F: setenv (vg_replace_strmem.c:2280)
+==10248==    by 0x489D2EF: _rl_get_screen_size (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891D58: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 24 bytes in 1 blocks are still reachable in loss record 22 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x49B7669: tsearch (tsearch.c:338)
+==10248==    by 0x4AADEFE: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB1120: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB541D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB5609: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC7F8: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 24 bytes in 1 blocks are still reachable in loss record 23 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A19B3: alloc_history_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A1C39: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A99E: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 26 bytes in 1 blocks are still reachable in loss record 24 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AA99C4: _nc_home_terminfo (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AA9107: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4EF6: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 28 bytes in 1 blocks are still reachable in loss record 25 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC90: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 28 bytes in 1 blocks are still reachable in loss record 26 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891876: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 32 bytes in 1 blocks are still reachable in loss record 27 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10E6DD: init_env (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A96D: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 32 bytes in 1 blocks are still reachable in loss record 28 of 92
+==10248==    at 0x48445EF: calloc (vg_replace_malloc.c:1328)
+==10248==    by 0x4972527: __wcsmbs_load_conv (wcsmbsload.c:168)
+==10248==    by 0x49670BE: get_gconv_fcts (wcsmbsload.h:74)
+==10248==    by 0x49670BE: mbrtowc (mbrtowc.c:70)
+==10248==    by 0x4893B22: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489654B: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 46 bytes in 1 blocks are still reachable in loss record 29 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x4AA9618: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB45E2: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB49EA: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4DF0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4F1B: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248== 
+==10248== 46 bytes in 1 blocks are still reachable in loss record 30 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AA6FEE: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC0B2: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 48 bytes in 1 blocks are still reachable in loss record 31 of 92
+==10248==    at 0x48445EF: calloc (vg_replace_malloc.c:1328)
+==10248==    by 0x4AA920B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4EF6: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 78 bytes in 1 blocks are still reachable in loss record 32 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AA705B: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC0B2: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 80 bytes in 1 blocks are still reachable in loss record 33 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10EB47: init_exec_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA42: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 93 bytes in 1 blocks are still reachable in loss record 34 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x494C31A: strdup (strdup.c:42)
+==10248==    by 0x4AADEE4: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB1120: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB541D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB5609: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC7F8: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 94 bytes in 1 blocks are still reachable in loss record 35 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AADAEB: _nc_tparm_analyze (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AADDF2: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB1120: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB541D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB5609: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC7F8: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 95 bytes in 1 blocks are still reachable in loss record 36 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AA9172: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4EF6: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 120 bytes in 1 blocks are still reachable in loss record 37 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48F1CA2: _nl_load_locale_from_archive (loadarchive.c:460)
+==10248==    by 0x48F0CD9: _nl_find_locale (findlocale.c:153)
+==10248==    by 0x48F0879: setlocale (setlocale.c:414)
+==10248==    by 0x48A0891: _rl_init_locale (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A0968: _rl_init_eightbit (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800CD: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 127 bytes in 10 blocks are definitely lost in loss record 38 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10FE2C: ending (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10FF99: ft_split (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10ED24: get_cmd_path (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E852: init_cmd_path (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10EA5B: update_elems (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A8BD: execution (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA55: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 156 bytes in 1 blocks are still reachable in loss record 39 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x4AA9618: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4614: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB49EA: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4DF0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4F1B: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248== 
+==10248== 168 bytes in 1 blocks are still reachable in loss record 40 of 92
+==10248==    at 0x48445EF: calloc (vg_replace_malloc.c:1328)
+==10248==    by 0x4AADE5D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB1120: _nc_tiparm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB541D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB5609: _nc_trim_sgr0 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC7F8: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 171 bytes in 1 blocks are still reachable in loss record 41 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48F03C7: new_composite_name (setlocale.c:170)
+==10248==    by 0x48F08DB: setlocale (setlocale.c:437)
+==10248==    by 0x48A0891: _rl_init_locale (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A0968: _rl_init_eightbit (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800CD: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 208 bytes in 1 blocks are still reachable in loss record 42 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48EF8B6: __gconv_lookup_cache (gconv_cache.c:366)
+==10248==    by 0x48E7071: __gconv_find_transform (gconv_db.c:733)
+==10248==    by 0x49725FD: __wcsmbs_getfct (wcsmbsload.c:92)
+==10248==    by 0x49725FD: __wcsmbs_load_conv (wcsmbsload.c:186)
+==10248==    by 0x49670BE: get_gconv_fcts (wcsmbsload.h:74)
+==10248==    by 0x49670BE: mbrtowc (mbrtowc.c:70)
+==10248==    by 0x4893B22: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489654B: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 208 bytes in 1 blocks are still reachable in loss record 43 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48EF7EE: __gconv_lookup_cache (gconv_cache.c:366)
+==10248==    by 0x48E7071: __gconv_find_transform (gconv_db.c:733)
+==10248==    by 0x4972641: __wcsmbs_getfct (wcsmbsload.c:92)
+==10248==    by 0x4972641: __wcsmbs_load_conv (wcsmbsload.c:189)
+==10248==    by 0x49670BE: get_gconv_fcts (wcsmbsload.h:74)
+==10248==    by 0x49670BE: mbrtowc (mbrtowc.c:70)
+==10248==    by 0x4893B22: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489654B: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 256 bytes in 1 blocks are still reachable in loss record 44 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880316: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 504 bytes in 1 blocks are still reachable in loss record 45 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x48FC8E3: __add_to_environ (setenv.c:154)
+==10248==    by 0x484AD4F: setenv (vg_replace_strmem.c:2280)
+==10248==    by 0x489D2EF: _rl_get_screen_size (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891D58: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4892545: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EC6D: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488035B: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 608 bytes in 1 blocks are still reachable in loss record 46 of 92
+==10248==    at 0x48445EF: calloc (vg_replace_malloc.c:1328)
+==10248==    by 0x4AB4826: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB49EA: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4DF0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4F1B: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 608 bytes in 1 blocks are still reachable in loss record 47 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AA7129: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC0B2: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 760 bytes in 1 blocks are still reachable in loss record 48 of 92
+==10248==    at 0x48445EF: calloc (vg_replace_malloc.c:1328)
+==10248==    by 0x4AAC045: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 940 bytes in 1 blocks are still reachable in loss record 49 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AB46FF: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB49EA: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4DF0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4F1B: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 942 bytes in 60 blocks are still reachable in loss record 50 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10F9BA: ft_substr (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E641: get_var_value (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E689: init_env_list (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E73B: init_env (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A96D: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 960 bytes in 60 blocks are still reachable in loss record 51 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10E5CB: get_var_value (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E689: init_env_list (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E73B: init_env (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A96D: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 960 bytes in 60 blocks are still reachable in loss record 52 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10FFB1: ft_lstnew (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E691: init_env_list (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E73B: init_env (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A96D: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 53 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x493195B: _IO_file_doallocate (filedoalloc.c:101)
+==10248==    by 0x493FE8F: _IO_doallocbuf (genops.c:347)
+==10248==    by 0x493FE8F: _IO_doallocbuf (genops.c:342)
+==10248==    by 0x493F037: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:745)
+==10248==    by 0x493E10D: _IO_new_file_xsputn (fileops.c:1244)
+==10248==    by 0x493E10D: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1197)
+==10248==    by 0x4932DDC: fwrite (iofwrite.c:39)
+==10248==    by 0x488683C: rl_prep_terminal (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488037A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 54 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A84C7: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489122B: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891332: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 55 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A84C7: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891243: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891332: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 56 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A84C7: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489125B: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891332: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 57 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A84C7: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891273: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891332: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 58 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4891385: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 59 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48913A0: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 60 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48913B8: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,024 bytes in 1 blocks are still reachable in loss record 61 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48913D0: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489754E: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487ED88: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880384: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,536 bytes in 1 blocks are still reachable in loss record 62 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x48A84AD: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884C04: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884C58: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800C8: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 1,664 bytes in 1 blocks are still reachable in loss record 63 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AB3E19: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB49EA: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4DF0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4F1B: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 2,032 bytes in 1 blocks are still reachable in loss record 64 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489DA69: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 2,240 bytes in 140 blocks are still reachable in loss record 65 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884BAC: rl_add_funmap_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884C58: rl_initialize_funmap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800C8: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 2,574 bytes in 60 blocks are still reachable in loss record 66 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10F86A: ft_strdup (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E611: get_var_value (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E689: init_env_list (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E73B: init_env (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A96D: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 3,728 bytes in 12 blocks are still reachable in loss record 67 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48F14BA: _nl_intern_locale_data (loadlocale.c:98)
+==10248==    by 0x48F1D10: _nl_load_locale_from_archive (loadarchive.c:477)
+==10248==    by 0x48F0CD9: _nl_find_locale (findlocale.c:153)
+==10248==    by 0x48F0879: setlocale (setlocale.c:414)
+==10248==    by 0x48A0891: _rl_init_locale (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A0968: _rl_init_eightbit (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800CD: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 3,904 bytes in 1 blocks are still reachable in loss record 68 of 92
+==10248==    at 0x484482F: realloc (vg_replace_malloc.c:1437)
+==10248==    by 0x4AA9618: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4632: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB49EA: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4DF0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AB4F1B: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AABD18: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC09B: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248== 
+==10248== 3,904 bytes in 1 blocks are still reachable in loss record 69 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x4AA700F: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC0B2: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AAC615: tgetent_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D824: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,016 bytes in 1 blocks are still reachable in loss record 70 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48A1CA9: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A99E: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,080 bytes in 1 blocks are still reachable in loss record 71 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489DA49: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 72 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489CFF5: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D977: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 73 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D07A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D977: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 74 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D07A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D983: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 75 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D07A: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D98F: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 76 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBFC: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880120: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 77 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBFC: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488012F: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 4,112 bytes in 1 blocks are still reachable in loss record 78 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBFC: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880154: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 7,952 bytes in 1 blocks are still reachable in loss record 79 of 92
+==10248==    at 0x48445EF: calloc (vg_replace_malloc.c:1328)
+==10248==    by 0x4AA83A7: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AA8B2B: _nc_find_type_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x4AACF58: tgetstr_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3)
+==10248==    by 0x489D872: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 80 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D067: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D977: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 81 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489CFF5: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D983: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 82 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D067: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D983: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 83 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489CFF5: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D98F: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 84 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D067: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x489D98F: _rl_init_terminal_io (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800AB: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 85 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBED: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880120: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 86 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBED: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488012F: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 87 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBED: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880154: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 88 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488016E: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 8,224 bytes in 2 blocks are still reachable in loss record 89 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488017D: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 12,336 bytes in 3 blocks are still reachable in loss record 90 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBC4: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488012F: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 12,336 bytes in 3 blocks are still reachable in loss record 91 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488D31D: rl_bind_keyseq_if_unbound_in_map (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EBC4: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880154: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 28,784 bytes in 7 blocks are still reachable in loss record 92 of 92
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4884D4D: rl_make_bare_keymap (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488C21A: rl_generic_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488DEDE: rl_parse_and_bind (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x488E0AC: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48800D4: rl_initialize (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x4880360: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== LEAK SUMMARY:
+==10248==    definitely lost: 129 bytes in 11 blocks
+==10248==    indirectly lost: 0 bytes in 0 blocks
+==10248==      possibly lost: 0 bytes in 0 blocks
+==10248==    still reachable: 219,953 bytes in 497 blocks
+==10248==         suppressed: 0 bytes in 0 blocks
+==10248== 
+==10248== ERROR SUMMARY: 9 errors from 7 contexts (suppressed: 0 from 0)
+==10248== 
+==10248== 1 errors in context 1 of 7:
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10B38F: files_open (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE92: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 
+==10248== 1 errors in context 2 of 7:
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10E0C1: remove_quotes_str (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E2BF: process_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE86: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 
+==10248== 1 errors in context 3 of 7:
+==10248== Invalid read of size 1
+==10248==    at 0x10BCE1: check_andor (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10C247: pre_check_line (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10A9F0: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Address 0x4b17ae6 is 0 bytes after a block of size 22 alloc'd
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x48A8488: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x487EF37: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x48803B2: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==10248==    by 0x10A97C: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 
+==10248== 2 errors in context 4 of 7:
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10E217: remove_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E2E3: process_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE86: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== 
+==10248== 2 errors in context 5 of 7:
+==10248== Conditional jump or move depends on uninitialised value(s)
+==10248==    at 0x10E0C1: remove_quotes_str (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E206: remove_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10E2E3: process_quotes (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10CE86: redirections (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10945A: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==  Uninitialised value was created by a heap allocation
+==10248==    at 0x483F7B5: malloc (vg_replace_malloc.c:381)
+==10248==    by 0x10936B: ft_srtuct_bzero (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1093A3: cmd_parse (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x1094AC: tree_parser (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248==    by 0x10AA28: main (in /home/akaouan/Desktop/hamid/minishell/minishell)
+==10248== 
+==10248== ERROR SUMMARY: 9 errors from 7 contexts (suppressed: 0 from 0)

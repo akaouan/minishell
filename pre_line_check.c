@@ -262,7 +262,7 @@ int    revcheck(char *line)
             i = rev_next_quote(line, i, line[i]);
         while (i >= 0 && line[i] == ' ')
             i--;
-        if (line[i] == '|' || line[i] == '&')
+        if (i >= 0 && (line[i] == '|' || line[i] == '&'))
         {
             if (i == (int)ft_strlen(line) - 1)
                 return (1);
