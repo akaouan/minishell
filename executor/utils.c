@@ -29,11 +29,15 @@ char	*get_cmd_path(char *cmd, char *path_value)
 	i = -1;
 	cmd_path = NULL;
 	paths = ft_split(path_value, ':');
+	// free(path_value);
 	while (paths[++i])
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);
 		if (!access(cmd_path, F_OK))
 		{
+			i  = -1;
+			while (paths[++i])
+				free(paths[i]);
 			free(paths);
 			free(cmd);
 			return (cmd_path);
@@ -46,18 +50,6 @@ char	*get_cmd_path(char *cmd, char *path_value)
 	free(paths);
 	ft_putstr_fd("Couldn't found command\n", STDERR_FILENO);
 	return (NULL);
-}
-
-int	get_path_index(char **env_vars)
-{
-	int	i;
-
-	i = -1;
-	while (env_vars[++i])
-		if (!ft_strncmp(env_vars[i], "PATH", 4))
-			return (i);
-	ft_putstr_fd("Couldn't found path variable\n", STDERR_FILENO);
-	return (-1);
 }
 
 int	arr_len(char **arr)

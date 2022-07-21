@@ -104,7 +104,7 @@ char	*get_valuue(char *var, t_cmd *pipe)
 	char	*str;
 
 	i = 0;
-	if (isdigit(var[0]))
+	if (ft_isdigit(var[0]))
 	{
 		str = ft_strdup(&var[1]);
 		free(var);
@@ -168,7 +168,7 @@ char *variable(char *str, t_cmd *pipe, int f)
 	i = 0;
 	if (str[i] == ' ')
 		return (str);
-	while (str[i] && (isalpha(str[i]) || isdigit(str[i]) || str[i] == '_'))
+	while (str[i] && (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '_'))
 		i++;
 	if (str[0] == '\'' || str[0] == '"')
 		return (rm_dollar(str, str[0]));

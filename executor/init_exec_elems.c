@@ -22,7 +22,7 @@ char *init_cmd_path(t_exec_elems *elems, char *cmd)
 	}
 	if (!path)
 		return (NULL);
-	cmd_path = get_cmd_path(ft_strjoin(ft_strdup("/"),
+	cmd_path = get_cmd_path(ft_strjoin("/",
 		cmd), path);
 	return (cmd_path);
 }
@@ -82,6 +82,7 @@ void	init_exec_elems(t_exec_elems **elems
 	*elems = malloc(sizeof(t_exec_elems));
 	(*elems)->pids = malloc((sizeof(int) * size));
 	(*elems)->pipes = malloc(sizeof(int *) * 2);
+
 	if (!(*elems)
 			|| !(*elems)->pids || !(*elems)->pipes
 				|| !init_pipes((*elems)->pipes))
