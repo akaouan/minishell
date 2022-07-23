@@ -48,6 +48,7 @@ char	*get_cmd_path(char *cmd, char *path_value)
 	while (paths[++i])
 		free(paths[i]);
 	free(paths);
+	free(cmd);
 	ft_putstr_fd("Couldn't found command\n", STDERR_FILENO);
 	return (NULL);
 }
