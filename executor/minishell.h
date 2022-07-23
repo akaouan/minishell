@@ -77,4 +77,5 @@ int		check_build_in(t_exec_elems *elems);
 void	cmd_export(t_list **env_list, char **args);
 int		get_index(char *str, char c);
 void	cmd_unset(t_list **env_list, char **args);
+void	free_elems(t_prior *data, t_exec_elems *elems);
 #endif

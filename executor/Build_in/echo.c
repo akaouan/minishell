@@ -25,10 +25,10 @@ void    cmd_echo(int fd_output, char **args)
     int option;
 
     i = 0;
+    if (!args[0])
+        return ;
     while (is_option(args[i]))
-    {
         i++;
-    }
     option = i;
     while (1)
     {

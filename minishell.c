@@ -48,16 +48,13 @@ int main(int ac, char **av, char **env)
 	line = 0;
 	elems = NULL;
 	init_env(&env_elems, env);
-	int i;
-
-	i = 0;
 	(void)ac;
 	(void)av;
 	while (1)
 	{
 		line = readline("\033[0;32mmonosholo-2.0$> \033[0m");
-		// if (line && line[0])
-		// 	add_history(line);
+		if (line && line[0])
+			add_history(line);
 		if (!line)
 		{
 			write(1, "\n", 1);
@@ -79,15 +76,7 @@ int main(int ac, char **av, char **env)
 		execution(script, elems);
 		close_pipes(elems->pipes);
 		wait_pids(elems);
-		free_tree(script);
-		free(script);
 		free (line);
-		i = -1;
-		while (++i < 2)
-			free(elems->pipes[i]);
-		free(elems->pipes);
-		free(elems->pids);
-		free(elems->cmd_path);
-		free(elems);
+		free_elems(script, elems);
    }
 }

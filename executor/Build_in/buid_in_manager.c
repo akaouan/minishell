@@ -45,6 +45,11 @@ int	check_build_in(t_exec_elems *elems)
 		elems->build_in = 1;
 		return (1);
 	}
+	else if (!ft_strncmp(elems->args[0], "exit", 4))
+	{
+		elems->build_in = 2;
+		return (1);
+	}
 	elems->build_in = 0;
 	return(0);
 }
