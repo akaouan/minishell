@@ -24,6 +24,8 @@ char *init_cmd_path(t_exec_elems *elems, char *cmd)
 		return (NULL);
 	cmd_path = get_cmd_path(ft_strjoin("/",
 		cmd), path);
+	if (!cmd_path)
+		elems->build_in = 2;
 	return (cmd_path);
 }
 
