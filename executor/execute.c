@@ -35,6 +35,7 @@ void	set_cmd(t_exec_elems *elems)
 		ft_putstr_fd("Faild to duplicate fd\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
+
 	close_pipes(elems->pipes);
 	execve(elems->cmd_path, elems->args, elems->env_elems->env);
 }
