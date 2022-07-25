@@ -19,7 +19,8 @@ void	delete_var_val(t_list *env_list, char *arg)
 	head = env_list;
 	while (head)
 	{
-		if (!ft_strncmp(((t_var_val *)head->content)->var
+		if (ft_strlen(((t_var_val *)head->content)->var) - 1 == ft_strlen(arg) &&
+			!ft_strncmp(((t_var_val *)head->content)->var
 			, arg, ft_strlen(arg)))
 		{
 			before->next = head->next;
