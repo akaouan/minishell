@@ -26,6 +26,7 @@ void	execution(t_prior *data, t_exec_elems *elems)
 		if (!elems->build_in)
 			execute(elems);
 		update_pipes(elems->pipes, elems->p2);
+		elems->build_in = 1;
 		return ;
 	}
 	while (j < i)

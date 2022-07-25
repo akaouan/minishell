@@ -29,7 +29,6 @@ char	*get_cmd_path(char *cmd, char *path_value)
 	i = -1;
 	cmd_path = NULL;
 	paths = ft_split(path_value, ':');
-	// free(path_value);
 	while (paths[++i])
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);

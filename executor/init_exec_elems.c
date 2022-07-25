@@ -17,15 +17,16 @@ char *init_cmd_path(t_exec_elems *elems, char *cmd)
 			path = ((t_var_val *)env_list->content)->value;
 			break;
 		}
-		else
-			env_list = env_list->next;
+		env_list = env_list->next;
 	}
 	if (!path)
 		return (NULL);
-	cmd_path = get_cmd_path(ft_strjoin("/",
-		cmd), path);
+	cmd_path = get_cmd_path(ft_strjoin("/", cmd), path);
 	if (!cmd_path)
+	{
 		elems->build_in = 2;
+		elems->cmd_index++;
+	}
 	return (cmd_path);
 }
 
