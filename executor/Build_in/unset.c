@@ -3,7 +3,7 @@
 void	delete(void *elem)
 {
 	t_var_val *to_free;
-	
+
 	to_free = (t_var_val *)elem;
 	free(to_free->value);
 	free(to_free->var);

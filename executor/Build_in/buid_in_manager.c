@@ -16,8 +16,11 @@ int	check_build_in(t_exec_elems *elems)
 	}
 	else if (!ft_strncmp(elems->args[0], "pwd", 3))
 	{
-		ft_putstr_fd(elems->env_elems->pwd->value, elems->cmd_output);
-		ft_putchar_fd('\n', elems->cmd_output);
+		if (elems->env_elems->pwd)
+		{
+			ft_putstr_fd(elems->env_elems->pwd->value, elems->cmd_output);
+			ft_putchar_fd('\n', elems->cmd_output);
+		}
 		elems->build_in = 1;
 		return (1);
 	}
