@@ -7,7 +7,7 @@ t_var_val *add_var_val(char *var_val)
 	elem = malloc(sizeof(t_var_val));
 	if (!elem)
 		return (NULL);
-	if (*(ft_strrchr(var_val, '=') + 1) != '\0')
+	if (ft_strchr(var_val, '=') && *(ft_strrchr(var_val, '=') + 1) != '\0')
 		elem->value = ft_strdup(ft_strchr(var_val, '=') + 1);
 	else
 		elem->value = ft_strdup("\0");

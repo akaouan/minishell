@@ -8,7 +8,7 @@ int	get_index(char *str, char c)
 	while (str[++i])
 		if (str[i] == c)
 			return (i);
-	return (0);
+	return (i - 1);
 }
 
 t_var_val	*get_pwd(t_list *elem, char *to_found)
@@ -26,7 +26,6 @@ t_var_val	*get_pwd(t_list *elem, char *to_found)
 				return (NULL);
 			var_val->value = ft_strdup(((t_var_val *)(elem->content))->value);
 			var_val->var = ft_strdup(((t_var_val *)(elem->content))->var);
-			printf("-->%s\n", var_val->var);
 			return (var_val);
 		}
 		else
@@ -74,6 +73,7 @@ void	init_env(t_env **env_elems, char **env)
 	init_env_list(&(*env_elems)->env_list, env, env_size);
 	(*env_elems)->pwd = get_pwd((*env_elems)->env_list, "PWD");
 	(*env_elems)->old_pwd = get_pwd((*env_elems)->env_list, "OLDPWD");
-	printf("%p\n", (*env_elems)->pwd);
+	// printf("%p\n%p\n", (*env_elems)->pwd, (*env_elems)->old_pwd);
+	// exit(1);
 	(*env_elems)->env = env;
 }

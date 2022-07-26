@@ -31,15 +31,15 @@ void	cmd_cd(t_var_val *old_pwd, t_var_val *pwd, char *path)
 		ft_putstr_fd("cd: no such file or directory: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);	
+		return ;
 	}
-	if (!ft_strncmp(path, "..", 2))
+	if (pwd && !ft_strncmp(path, "..", 2))
 	{
 		free(old_pwd->value);
 		old_pwd->value = ft_strdup(pwd->value);
 		pwd->value = ft_substr(pwd->value, 0, get_last_char(pwd->value, '/'));
 	}
-	else
+	else if (pwd)
 	{
 		path = ft_strjoin(ft_strdup("/"), path);
 		free(old_pwd->value);
