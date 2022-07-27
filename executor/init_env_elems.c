@@ -73,7 +73,5 @@ void	init_env(t_env **env_elems, char **env)
 	init_env_list(&(*env_elems)->env_list, env, env_size);
 	(*env_elems)->pwd = get_pwd((*env_elems)->env_list, "PWD");
 	(*env_elems)->old_pwd = get_pwd((*env_elems)->env_list, "OLDPWD");
-	// printf("%p\n%p\n", (*env_elems)->pwd, (*env_elems)->old_pwd);
-	// exit(1);
 	(*env_elems)->env = env;
 }
