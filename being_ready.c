@@ -6,11 +6,11 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:44:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/19 12:15:59 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:33:19 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "executor/minishell.h"
 
 void	ft_srtuct_bzero(t_cmd *pipe)
 {
@@ -40,15 +40,16 @@ void	ft_srtuct_bzero(t_cmd *pipe)
 
 
 
-t_cmd	*cmd_parse(char *line, char **env)
+t_cmd	*cmd_parse(char *line, char **env, t_list *head)
 {
 	t_cmd	*pipe;
 	int		j;
 
 	pipe = malloc(sizeof(t_cmd));
 	ft_srtuct_bzero(pipe);
+	(void)env;
 	pipe->line = line;
-	set_env(pipe, env);
+	set_env(pipe, head, head);
 	pipe->inputs_num = malloc(sizeof(int));
 	pipe->outputs_num = malloc(sizeof(int));
 	pipe->append_num = malloc(sizeof(int));
@@ -63,21 +64,21 @@ t_cmd	*cmd_parse(char *line, char **env)
 	return (pipe);
 }
 
-void	tree_parser(t_prior *script, char **env)
+void	tree_parser(t_prior *script, char **env, t_list *head)
 {
 	int	i;
 	int	j;
 
 	if (script->numofchilds == 0)
 	{
-		script->cmd = cmd_parse(script->slices[0], env);
+		script->cmd = cmd_parse(script->slices[0], env, head);
 		return ;
 	}
 	i = script->numofchilds;
 	j = 0;
 	while (j < i)
 	{
-		tree_parser(script->next[j], env);
+		tree_parser(script->next[j], env, head);
 		j++;
 	}
 }

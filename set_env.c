@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:41:29 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/25 18:38:19 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:51:57 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	lenafterequal(char *str)
 		j++;
 	return (j);
 }
-void	set_env(t_cmd *pipe, char **env)
+
+void		set_env(t_cmd *pipe, t_list *head, t_list *headtem)
 {
 	int	i;
 	int	j;
@@ -46,8 +47,11 @@ void	set_env(t_cmd *pipe, char **env)
 
 	i = 0;
 	k = 0;
-	while (env[i])
+	while (headtem)
+	{
+		headtem = headtem->next;
 		i++;
+	}
 	if (pipe->env_valuue)
 		free(pipe->env_valuue);
 	if (pipe->env_var)
@@ -55,29 +59,31 @@ void	set_env(t_cmd *pipe, char **env)
 	pipe->env_var = malloc(sizeof(char *) * (i + 1));
 	pipe->env_valuue = malloc(sizeof(char *) * (i + 1));
 	i = 0;
-	while (env[i])
+	headtem = head;
+	while (headtem)
 	{
-		j = lenuntillequal(env[i]);
-		pipe->env_var[i] = (malloc(sizeof(char *) * (j + 1)));
+		j = ft_strlen(((t_var_val *)headtem->content)->var);
+		pipe->env_var[i] = (malloc(sizeof(char ) * (j)));
 		k = 0;
-		while (k < j)
+		while (k < j - 1)
 		{
-			pipe->env_var[i][k] = env[i][k];
+			pipe->env_var[i][k] = ((t_var_val *)headtem->content)->var[k];
 			k++;
 		}
 		pipe->env_var[i][k] = '\0';
-		j = lenafterequal(env[i]);
-		pipe->env_valuue[i] = (malloc(sizeof(char *) * (j + 1)));
+		j = ft_strlen(((t_var_val*)headtem->content)->value);
+		pipe->env_valuue[i] = (malloc(sizeof(char ) * (j + 1)));
 		l = 0;
 		k++;
 		while (l < j)
 		{
-			pipe->env_valuue[i][l] = env[i][k];
+			pipe->env_valuue[i][l] = ((t_var_val*)headtem->content)->value[l];
 			l++;
 			k++;
 		}
 		pipe->env_valuue[i][l] = '\0';
 		i++;
+		headtem = headtem->next;
 	}
 	pipe->env_var[i] = 0;
 	pipe->env_valuue[i] = 0;

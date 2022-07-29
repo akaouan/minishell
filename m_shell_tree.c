@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 13:33:33 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/19 13:01:39 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:08:11 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,5 +370,6 @@ t_prior*    m_shell_parser(char *line)
 	}
 	script->next = malloc(sizeof(t_prior *) * strsnums(slices));
 	m_shell(slices, script);
+	global.con = script->numofchilds;
 	return (script);
 }

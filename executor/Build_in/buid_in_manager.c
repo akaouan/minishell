@@ -38,7 +38,7 @@ int	check_build_in(t_exec_elems *elems)
 	}
 	else if (!ft_strncmp(elems->args[0], "export", 6))
 	{
-		cmd_export(&elems->env_elems->env_list, elems->args);
+		cmd_export(&elems->env_elems->env_list, elems->args, elems);
 		elems->build_in = 1;
 		return (1);
 	}

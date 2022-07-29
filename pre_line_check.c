@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/19 18:46:16 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:54:46 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,10 @@ int    check_andor_i(char *line, int *k, int *i)
             break ;
     }
     if ((*k) == 0 && line[(*k)] == ' ')
+    {
+        check_dir_ii(line[(*k)]);
         return (1);
+    }
     return (0);
 }
 int    check_andor_ii(char *line, int *k, int *i, int *j)
@@ -246,7 +249,10 @@ int    revcheck_i(char *line, int k, int i)
             break ;
     }
     if (k == (int)ft_strlen(line) - 1 && line[k] == ' ')
+    {
+        check_dir_ii(line[i]);
         return (1);
+    }
     return (0);
 }
 
@@ -294,6 +300,8 @@ int    check_dir_i(int    i, char *line, char c, char g)
         write(2, ">$ syntax error near unexpected token `>'\n", 42);
         return (1);
     }
+    while (line[i] == ' ')
+        i++;
     if (line[i ] == g || line[i ] == '|' || line[i ] == '&' || line[i ] == '(' || line[i ] == ')')
     {
         check_dir_ii(line[i]);
@@ -323,12 +331,16 @@ int    check_dir(char *line)
         if (line[i] == '<')
         {
             i++;
+            while (line[i] == ' ')
+                i++;
             if (check_dir_i(i, line, '<', '>'))
                 return (1);
         }
         else if (line[i] == '>')
         {
             i++;
+            while (line[i] == ' ')
+                i++;
             if (check_dir_i(i, line, '>', '<'))
                 return (1);
         }

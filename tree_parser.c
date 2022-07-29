@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:49:57 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/18 19:18:50 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:37:06 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,11 +225,13 @@ int	untill_char_v(char *str, char c)
 	return (i);
 }
 
-int	after_var(char *str)
+int	after_var(char *str, char c)
 {
 	int	i;
 
 	i = 0;
+	if (c == '?')
+		return (2);
 	if (str[i] == '\'' || str[i] == '"')
 	{
 		return (next_qoute(str, str[0]) + 2);
@@ -240,7 +242,7 @@ int	after_var(char *str)
 	return (i);
 }
 
-char	*change_vall(char *str,char *var)
+char	*change_vall(char *str,char *var, char c)
 {
 	int		j;
 	char	*tem;
@@ -250,7 +252,7 @@ char	*change_vall(char *str,char *var)
 	tem_t = str;
 	j = untill_char_v(str, '$');
 	tem = ft_substr(str, 0, j);
-	j += after_var(&str[j + 1]);
+	j += after_var(&str[j + 1], c);
 	tem_tw = ft_substr(str, j, ft_strlen(str));
 	if (var)
 		str = ft_strjoin(tem, var);
@@ -283,7 +285,7 @@ char	*get_val_i(char *str, int f, int *i, t_cmd *pipe)
 		*i = -1;
 		return (0);
 	}
-	str = change_vall(str, tem_tw);
+	str = change_vall(str, tem_tw, 'p');
 	(*i)--;
 	}
 	return (tem_tw);
@@ -311,24 +313,28 @@ char	*get_val(char *str, t_cmd *pipe, int j, int f)
 				i += next_qoute(&str[i ], '\'');
 		if (str[i] == '$')
 		{
-	// 		tem_tw =  get_val_i(str, f, &i, pipe);// heeere
-	// printf("LL%d\n",i);
-	// 		if (i == -1)
-	// 			return (0);
-			if (i != 0 && str[i - 1] == '"' && str[i + 1] == '"')
+			if (str[i + 1] == '?')
 			{
+				tem_tw = ft_itoa(global.exit_status);
+				str = change_vall(str, tem_tw, '?');
 			}
 			else
 			{
-			tem_tw = variable(&str[i + 1], pipe, f);
-			if (f == 1 && !tem_tw)
-			{
-				pipe->read_from[0] = -1;
-				write(2, "ambiguous redirect\n", 19);
-				return (0);
-			}
-			str = change_vall(str, tem_tw);
-			i--;
+				if (i != 0 && str[i - 1] == '"' && str[i + 1] == '"')
+				{
+				}
+				else
+				{
+				tem_tw = variable(&str[i + 1], pipe, f);
+				if (f == 1 && !tem_tw)
+				{
+					pipe->read_from[0] = -1;
+					write(2, "ambiguous redirect\n", 19);
+					return (0);
+				}
+				str = change_vall(str, tem_tw, '\0');
+				i--;
+				}
 			}
 		}
 		i++;

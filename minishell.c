@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:09 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/19 12:08:51 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:33:24 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,25 @@ void	execution(t_prior *data, t_exec_elems *elems)
 	j = 0;
 	i = data->numofchilds;
 	if (i == 0)
-	{	
+	{
+		// printf("%d  %s   %d\n", data->cmd->read_from[0],data->cmd->cmd, data->cmd->write_to[0]);
+		if (data->cmd->read_from[0] == -1)
+			return ;
 		update_elems(elems, data);
 		if (!elems->build_in)
 			execute(elems);
-		update_pipes(elems->pipes, elems->p2);
-		elems->build_in = 1;
+		update_pipes(elems->pipes, elems->p2);		
 		return ;
 	}
 	while (j < i)
+	{
+		// printf("%p\n", data->cmd);
+		// update_elems(elems, data);
+		// if (!elems->build_in)
+		// 	execute(elems);
+		// update_pipes(elems->pipes, elems->p2);
 		j++;
+	}
 	j = 0;
 	while(j < i)
 	{
@@ -48,19 +57,20 @@ int main(int ac, char **av, char **env)
 
 	line = 0;
 	elems = NULL;
-	init_env(&env_elems, env);
 	(void)ac;
 	(void)av;
+	int i = 0;
+	sig_manager();
+	init_env(&env_elems, env);
 	while (1)
 	{
+		global.is = 0;
+		i++;
 		line = readline("\033[0;32mmonosholo-2.0$> \033[0m");
 		if (line && line[0])
 			add_history(line);
 		if (!line)
-		{
-			write(1, "\n", 1);
-			continue ;
-		}
+			exit(0);
 		if (!all_space(line))
 		{
 			free(line);
@@ -72,12 +82,24 @@ int main(int ac, char **av, char **env)
 		   continue ;
 		}
 		script = m_shell_parser(line);
-		tree_parser(script, env);
+		tree_parser(script, env, env_elems->env_list);
+		global.is = 1;
 		init_exec_elems(&elems, env_elems, script->numofchilds);
 		execution(script, elems);
 		close_pipes(elems->pipes);
 		wait_pids(elems);
+		free_tree(script);
+		free(script);
 		free (line);
-		free_elems(script, elems);
+		line = 0;
    }
 }
+
+// init_env(&env_elems, env);
+//     t_listhead;
+//     head = env_elems->env_list;
+//     while (head)
+//     {
+//         printf("%s <<----->> %s\n", ((t_var_val )head->content)->var, ((t_var_val)head->content)->value);
+//         head = head->next;
+//     }

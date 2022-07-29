@@ -47,15 +47,35 @@ int	is_valid(t_list **env_list, char *var)
 	return (1);
 }
 
-void	cmd_export(t_list **env_list, char **args)
+void	print_env(t_list *env_list, t_exec_elems *elems)
+{
+	t_list *head;
+
+	head = env_list;
+	while (head)
+	{
+		ft_putstr_fd("declare -x ", elems->cmd_output);
+		ft_putstr_fd(((t_var_val *)head->content)->var, elems->cmd_output);
+		ft_putchar_fd('\"', elems->cmd_output);
+		ft_putstr_fd(((t_var_val *)head->content)->value, elems->cmd_output);
+		ft_putchar_fd('\"', elems->cmd_output);
+		ft_putchar_fd('\n', elems->cmd_output);
+		head = head->next;
+	}
+}
+
+void	cmd_export(t_list **env_list, char **args, t_exec_elems *elems)
 {
 	int i;
 	char *var;
 	char *val;
 
 	i = 0;
-	if (!args[0])
+	if (!args[1])
+	{
+		print_env(*env_list, elems);
 		return ;
+	}
 	while (args[++i])
 	{
 		var = ft_substr(args[i], 0, get_index(args[i], '='));

@@ -73,9 +73,11 @@ int		arr_len(char **arr);
 int		check_build_in(t_exec_elems *elems);
 void	cmd_env(t_exec_elems *elems);
 int		check_build_in(t_exec_elems *elems);
-void	cmd_export(t_list **env_list, char **args);
+void	cmd_export(t_list **env_list, char **args, t_exec_elems *elems);
 int		get_index(char *str, char c);
 void	cmd_unset(t_list **env_list, char **args);
 void	free_elems(t_prior *data, t_exec_elems *elems);
 void	delete_var_val(t_list *env_list, char *arg);
+void	tree_parser(t_prior *script, char **env, t_list *head);
+void	set_env(t_cmd *pipe, t_list *head, t_list *headtem);
 #endif
