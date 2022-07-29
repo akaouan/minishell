@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:09 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/27 21:33:24 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:44:01 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ void	execution(t_prior *data, t_exec_elems *elems)
 		// printf("%d  %s   %d\n", data->cmd->read_from[0],data->cmd->cmd, data->cmd->write_to[0]);
 		if (data->cmd->read_from[0] == -1)
 			return ;
-		update_elems(elems, data);
-		if (!elems->build_in)
-			execute(elems);
-		update_pipes(elems->pipes, elems->p2);		
+		// update_elems(elems, data);
+		// if (!elems->build_in)
+		// 	execute(elems);
+		// update_pipes(elems->pipes, elems->p2);		
 		return ;
 	}
 	while (j < i)
 	{
-		// printf("%p\n", data->cmd);
-		// update_elems(elems, data);
+		//update_elems(elems, data);
 		// if (!elems->build_in)
 		// 	execute(elems);
 		// update_pipes(elems->pipes, elems->p2);
@@ -43,7 +42,12 @@ void	execution(t_prior *data, t_exec_elems *elems)
 	j = 0;
 	while(j < i)
 	{
-		execution(data->next[j], elems);
+		printf("%s\n", data->operator[j]);
+		if (data->operator[j] == "||" || data->operator[j] == "&&")
+		{
+			execution(data->next[j], elems);
+			// wait for all children and then 
+		}
 		j++;
 	}
 }

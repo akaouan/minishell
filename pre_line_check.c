@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/28 14:54:46 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:09:33 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int check_parentheses_ii(char *line, int    *i, int *j, int *k)
     {
         if (next_qoute(&line[(*i)], line[(*i)]) == -1)
         {
+            global.is_printed = 1;
             write(2, ">$ syntax error Unclosed qoute\n", 31);
             return (1);
         }
@@ -62,7 +63,7 @@ int check_parentheses_ii(char *line, int    *i, int *j, int *k)
     }
     else if (line[(*i)] == '(')
     {
-        if (check_parentheses_ii(line, i, j, k))
+        if (check_parentheses_i(line, i, j, k))
             return (1);
     }
     else if (line[(*i)] == ')')
@@ -118,6 +119,7 @@ int check_parentheses(char *line)
     }
     if (j != 0)
     {
+        global.is_printed = 1;
         write(2, ">$ syntax error near unexpected token `('\n", 42);
         return (1);
     }
@@ -209,10 +211,13 @@ int    check_andor(char *line)
 {
     int    i;
     int    l;
+    int     len;
 
+    len = ft_strlen(line);
     i = 0;
     l = 0;
-    while (line[i])
+
+    while (i < len)
     {
         if (check_andor_vi(line, &i, &l))
             return (1);
@@ -226,7 +231,7 @@ int    check_andor(char *line)
 int    rev_next_quote(char *line, int    j, char c)
 {
     j--;
-    while (line[j] != c)
+    while (j >= 0 && line[j] != c)
         j--;
     return (j);
 }
@@ -287,6 +292,7 @@ int    revcheck(char *line)
 
 void    check_dir_ii(char c)
 {
+    global.is_printed = 1;
     write(2, ">$ syntax error near unexpected token `", 40);
     write(2, &c, 1);
     write(2, "'\n", 2);
@@ -297,6 +303,7 @@ int    check_dir_i(int    i, char *line, char c, char g)
         i++;
     if (!line[i])
     {
+        global.is_printed = 1;
         write(2, ">$ syntax error near unexpected token `>'\n", 42);
         return (1);
     }
@@ -351,9 +358,11 @@ int    check_dir(char *line)
 
 int pre_check_line(char *line)
 {
+    global.is_printed = 0;
     if (check_parentheses(line) || check_andor(line)
             || revcheck(line) || check_dir(line))
     {
+        if (global.is_printed == 0)
         write(2, ">$ syntax error unexpected token \n", 34);
         return (1);
     }

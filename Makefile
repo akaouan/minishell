@@ -25,7 +25,7 @@ all:  $(NAME)
 $(NAME): $(OBJECTS)
 	@cd libft && make && make bonus
 	@cd ..
-	@$(CC) $(CFLAGS) $(OBJECTS) -g -lreadline -L /Users/akaouan/.brew/opt/readline/lib -I /Users/akaouan/.brew/opt/readline/include  -o $(NAME) libft/libft.a
+	@$(CC) $(CFLAGS) $(OBJECTS) -g -lreadline -L /Users/ael-hayy/.brew/opt/readline/lib -I /Users/ael-hayy/.brew/opt/readline/include  -o $(NAME) libft/libft.a
 
 clean:
 	$(RM) *.o

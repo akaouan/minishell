@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 13:33:33 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/25 16:08:11 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:03:54 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,7 @@ char    *get_substr(char *line, int *len, int start, char **operator)
 	j = 0;
 	k = 0;
 	slice = malloc(sizeof(char) * len[start] + 1);
-	if (operator)
-		operator[start] = malloc(sizeof(char) * 3);
+	
 	check_malloc(slice, 0, 1);
 	if (start == 0)
 	{
@@ -206,7 +205,9 @@ char    *get_substr(char *line, int *len, int start, char **operator)
 		while (line[i] == ' ')
 			i++;
 		while (line[i] == '|' || line[i] == '&')
+		{
 			operator[start][j++] = line[i++];
+		}
 		if (j)
 			operator[start][j++] = '\0';
 		return (slice);
@@ -232,6 +233,10 @@ char    *get_substr(char *line, int *len, int start, char **operator)
 	while (line[i] == ')')
 		i++;
 	j =0;
+	while (line[i] == '(')
+		i++;
+	while (line[i] == ' ')
+		i++;
 	while (line[i] == '|' || line[i] == '&')
 	{
 		operator[start][j] = line[i];
@@ -265,27 +270,31 @@ void	get_operators(char ***operators, char *line, int *lens, int i)
 	}
 }
 
-char    **ft_split_pro(char *line, char ***operators)
+char    **ft_split_pro(char *line, char **operators)
 {
 	char    **slices;
 	int     num_of_cmds;
 	int     *lens;
 	int     i;
-	char **oo = 0;
+	//char **oo = 0;
 	num_of_cmds = calulate_cmds(line);
 	lens = malloc(sizeof(int) * (num_of_cmds));
 	calulate_cmds_lens(line, lens);
 	slices = allocate(lens, num_of_cmds);
-	if (num_of_cmds > 1)
-		oo = allocate(0, num_of_cmds);
+	// if (num_of_cmds > 1)
+	// 	oo = allocate(0, num_of_cmds);
 	i = 0;
 	while (i < num_of_cmds)
 	{
-		slices[i] = get_substr(line, lens, i, oo);
+		if (operators)
+			operators[i] = malloc(sizeof(char) * 3);
+		slices[i] = get_substr(line, lens, i, operators);
 		i++;
 	}
+	if (num_of_cmds > 1)
+		operators[i] = NULL;
 	slices[i] = NULL;
-	*operators = oo;
+	//*operators = oo;
 	free(lens);
 	return (slices);
 }
@@ -359,7 +368,10 @@ t_prior*    m_shell_parser(char *line)
 
 	script = malloc(sizeof(t_prior));
 	check_malloc(script, 0, 1);
-	slices = ft_split_pro(line, &script->operator);
+	script->operator = 0;
+	if (calulate_cmds(line) > 1)
+		script->operator = malloc(sizeof(char *) * (calulate_cmds(line) + 1));
+	slices = ft_split_pro(line, script->operator);
 	script->numofchilds = strsnums(slices);
 	script->line = line;
 	script->slices = slices;

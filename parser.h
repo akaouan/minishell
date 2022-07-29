@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:37:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/28 12:29:15 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/29 11:36:24 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct jp_morgan
 	int	exit_status;
 	int	is;
 	int	con;
+	int	is_printed;
 }	t_jp;
 
 t_jp	global;
@@ -91,7 +92,7 @@ void	free_db_int(int **intg, int num);
 void	check_dir_ii(char c);
 char	*variable_i(char *tem, t_cmd *pipe, int f);
 void	rl_replace_line(const char *str, int undo);
-
+int check_parentheses_i(char *line, int    *i, int *j, int *k);
 void    sig_handler_cs();
 void    sig_handler_cd();
 void    sig_handler_cc();
