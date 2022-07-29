@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:41:29 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/28 14:51:57 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:07:26 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ void		set_env(t_cmd *pipe, t_list *head, t_list *headtem)
 	}
 	pipe->env_var[i] = 0;
 	pipe->env_valuue[i] = 0;
+	////hello
 }
