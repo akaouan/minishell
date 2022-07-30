@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+#include "../minishell.h"
+
 int	check_build_in(t_exec_elems *elems)
 {
 	if (!ft_strncmp(elems->args[0], "cd", 2))
@@ -50,6 +52,7 @@ int	check_build_in(t_exec_elems *elems)
 	}
 	else if (!ft_strncmp(elems->args[0], "exit", 4))
 	{
+		ft_exit(elems->args);
 		elems->build_in = 2;
 		return (1);
 	}

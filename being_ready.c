@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:44:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/29 15:05:14 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/30 18:21:52 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ void	ft_srtuct_bzero(t_cmd *pipe)
 	pipe->lastout = 0;
 	pipe->lastin = 0;
 	pipe->fd = 0;
-	printf("_-_\n");
 	pipe->read_from = malloc(sizeof(int));
 }
-
-
 
 t_cmd	*cmd_parse(char *line, char **env, t_list *head)
 {
@@ -72,7 +69,6 @@ void	tree_parser(t_prior *script, char **env, t_list *head)
 
 	if (script->numofchilds == 0)
 	{
-		printf("::\n");
 		script->cmd = cmd_parse(script->slices[0], env, head);
 		return ;
 	}

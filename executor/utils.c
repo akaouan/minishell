@@ -49,6 +49,7 @@ char	*get_cmd_path(char *cmd, char *path_value)
 	free(paths);
 	free(cmd);
 	ft_putstr_fd("Couldn't found command\n", STDERR_FILENO);
+	global.exit_status = 127;
 	return (NULL);
 }
 

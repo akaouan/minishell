@@ -3,6 +3,5 @@ make: Entering directory `/Users/ael-hayy/Desktop/hammiiiiid'
 cd libft && make && make bonus
 cd ..
 gcc -Wall -Werror -Wextra -g -fsanitize=address *c ./executor/*c ./executor/Build_in/*c -g -lreadline -L /Users/ael-hayy/.brew/opt/readline/lib -I /Users/ael-hayy/.brew/opt/readline/include  -o minishell libft/libft.a
- 
 make: Leaving directory `/Users/ael-hayy/Desktop/hammiiiiid'
  

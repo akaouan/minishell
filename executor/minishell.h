@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:21:28 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/05/25 17:09:44 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:37:24 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ void	free_elems(t_prior *data, t_exec_elems *elems);
 void	delete_var_val(t_list *env_list, char *arg);
 void	tree_parser(t_prior *script, char **env, t_list *head);
 void	set_env(t_cmd *pipe, t_list *head, t_list *headtem);
+int		ft_exit(char **args);
 #endif
