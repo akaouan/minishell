@@ -8,7 +8,7 @@ int	check_build_in(t_exec_elems *elems)
 	{
 		if (!elems->args[1])
 		{
-			ft_putstr_fd("bash: cd: HOME not set\n", STDERR_FILENO);
+			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 			return (1);
 		}
 		cmd_cd(elems->env_elems->old_pwd, elems->env_elems->pwd
