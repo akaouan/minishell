@@ -8,7 +8,7 @@ int	get_index(char *str, char c)
 	while (str[++i])
 		if (str[i] == c)
 			return (i);
-	return (i - 1);
+	return (i);
 }
 
 t_var_val	*get_pwd(t_list *elem, char *to_found)
@@ -45,7 +45,7 @@ t_var_val	*get_var_value(char *env)
 		exit(EXIT_FAILURE);		
 	}
 	elem->value = ft_strdup(ft_strchr(env, '=') + 1);
-	elem->var = ft_substr(env, 0, get_index(env, '=') + 1);
+	elem->var = ft_substr(env, 0, get_index(env, '='));
 	return (elem);
 }
 

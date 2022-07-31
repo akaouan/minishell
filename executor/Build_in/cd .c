@@ -13,19 +13,9 @@ int	get_last_char(char *pwd, char c)
 	return (last_char);
 }
 
-void	rm_back(char *str)
-{
-	int i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == '/')
-			str[i] = '\0';
-}
-
 void	cmd_cd(t_var_val *old_pwd, t_var_val *pwd, char *path)
 {
-	rm_back(path);
+	ft_strrchr(path, '/');
 	if(chdir(path) == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", STDERR_FILENO);

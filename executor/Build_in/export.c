@@ -11,7 +11,7 @@ t_var_val *add_var_val(char *var_val)
 		elem->value = ft_strdup(ft_strchr(var_val, '=') + 1);
 	else
 		elem->value = ft_strdup("\0");
-	elem->var = ft_substr(var_val, 0, get_index(var_val, '=') + 1);
+	elem->var = ft_substr(var_val, 0, get_index(var_val, '='));
 	return (elem);
 }
 
@@ -32,7 +32,8 @@ int	is_valid(t_list **env_list, char *var)
 	i = -1;
 	while (head)
 	{
-		if (!ft_strncmp(((t_var_val *)head->content)->var, var, ft_strlen(var)))
+		if (!ft_strncmp(((t_var_val *)head->content)->var, var,
+				ft_strlen(((t_var_val *)head->content)->var)))
 		{
 			delete_var_val(*env_list, var);
 			return (1);
@@ -42,7 +43,7 @@ int	is_valid(t_list **env_list, char *var)
 	if (ft_isdigit(var[0]))
 		return 0;
 	while(var[++i])
-		if (!ft_isalnum(var[i]) && var[i] != '_')
+		if (!ft_isalnum(var[i]) && var[i] != '_' && var[i] != '=')
 			return (0);
 	return (1);
 }
@@ -56,6 +57,7 @@ void	print_env(t_list *env_list, t_exec_elems *elems)
 	{
 		ft_putstr_fd("declare -x ", elems->cmd_output);
 		ft_putstr_fd(((t_var_val *)head->content)->var, elems->cmd_output);
+		ft_putchar_fd('=', elems->cmd_output);
 		ft_putchar_fd('\"', elems->cmd_output);
 		ft_putstr_fd(((t_var_val *)head->content)->value, elems->cmd_output);
 		ft_putchar_fd('\"', elems->cmd_output);
