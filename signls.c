@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 12:57:12 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 20:50:55 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/30 20:55:13 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ void	sig_manager()
 }
 void	sig_handler_cc()
 {
-	int	saver;
 	if (!global.is)
 	{
 		if (global.her)
 		{
 			global.her = -1;
-			saver = dup(0);
+			global.saver = dup(0);
 			close(0);
-			
-			//close(j[]);
 			return ;
 		}
 		printf("\n");

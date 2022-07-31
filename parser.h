@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:37:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 18:32:02 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/30 20:54:47 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct jp_morgan
 	int	con;
 	int	is_printed;
 	int	her;
+	int	saver;
 }	t_jp;
 
 t_jp	global;

@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:09 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 20:52:59 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/31 10:19:23 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ int main(int ac, char **av, char **env)
 	init_env(&env_elems, env);
 	while (1)
 	{
-		global.is = 0;
 		i++;
-		dup2(saver, 0);
+		if (global.her == -1)
+		{
+			global.her = 0;
+			dup2(global.saver, 0);
+		}
+		global.is = 0;
 		line = readline("\033[0;32mmonosholo-2.0$> \033[0m");
 		if (line && line[0])
 			add_history(line);
