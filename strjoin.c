@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 00:32:19 by akaouan           #+#    #+#             */
-/*   Updated: 2022/07/31 15:56:28 by ael-hayy         ###   ########.fr       */
+/*   Created: 2022/07/31 15:56:44 by ael-hayy          #+#    #+#             */
+/*   Updated: 2022/07/31 15:57:20 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "executor/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoinn(char *s1, char const *s2)
 {
 	int		i;
 	char	*p;
@@ -33,5 +33,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j])
 		p[i++] = s2[j++];
 	p[i] = '\0';
+	if (s1)
+		free(s1);
 	return (p);
 }
