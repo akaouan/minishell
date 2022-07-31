@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 22:41:29 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 17:24:06 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:46:49 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	set_env_v(t_cmd *pipe, int i, t_list *headtem)
 	int	k;
 
 	j = ft_strlen(((t_var_val *)headtem->content)->var);
-	pipe->env_var[i] = (malloc(sizeof(char) * (j)));
+	pipe->env_var[i] = (malloc(sizeof(char) * (j + 1)));
 	k = 0;
-	while (k < j - 1)
+	while (k < j)
 	{
 		pipe->env_var[i][k] = ((t_var_val *)headtem->content)->var[k];
 		k++;
