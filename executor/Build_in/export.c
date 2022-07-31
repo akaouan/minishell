@@ -40,7 +40,7 @@ int	is_valid(t_list **env_list, char *var)
 		}
 		head = head->next;
 	}
-	if (ft_isdigit(var[0]))
+	if (ft_isdigit(var[0]) || var[0] == '=')
 		return 0;
 	while(var[++i])
 		if (!ft_isalnum(var[i]) && var[i] != '_' && var[i] != '=')
@@ -82,7 +82,7 @@ void	cmd_export(t_list **env_list, char **args, t_exec_elems *elems)
 	{
 		var = ft_substr(args[i], 0, get_index(args[i], '='));
 		val = ft_strdup(ft_strchr(args[i], '='));
-		if (is_valid(env_list, var))
+		if (args[i][0] != '=' && is_valid(env_list, var))
 			ft_lstadd_back(env_list,
 				ft_lstnew((void *)add_var_val(args[i])));
 		else

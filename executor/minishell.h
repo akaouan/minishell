@@ -81,4 +81,5 @@ void	delete_var_val(t_list *env_list, char *arg);
 void	tree_parser(t_prior *script, char **env, t_list *head);
 void	set_env(t_cmd *pipe, t_list *head, t_list *headtem);
 int		ft_exit(char **args);
+void	update_pwd(char *path, t_var_val *old_pwd, t_var_val *pwd);
 #endif
