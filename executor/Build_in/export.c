@@ -17,7 +17,7 @@ t_var_val *add_var_val(char *var_val)
 
 void	print_error(char *var, char *val)
 {
-	ft_putstr_fd("bash: export: `", STDERR_FILENO);
+	ft_putstr_fd("minishell(v3.0): export: `", STDERR_FILENO);
 	ft_putstr_fd(var, STDERR_FILENO);
 	ft_putstr_fd(val, STDERR_FILENO);
 	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);

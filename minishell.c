@@ -76,7 +76,7 @@ int main(int ac, char **av, char **env)
 			dup2(global.saver, 0);
 		}
 		global.is = 0;
-		line = readline("\033[0;32mmonosholo-2.0$> \033[0m");
+		line = readline("\033[0;32mminishell(v3.0)$> \033[0m");
 		if (line && line[0])
 			add_history(line);
 		if (!line)
