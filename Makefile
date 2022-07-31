@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra# -g -fsanitize=address
 RM = rm -f
 NAME = minishell
 FILES = *c  ./executor/*c ./executor/Build_in/*c

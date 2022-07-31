@@ -76,7 +76,7 @@ int main(int ac, char **av, char **env)
 			dup2(global.saver, 0);
 		}
 		global.is = 0;
-		line = readline("\033[0;32mminishell(v3.0)$> \033[0m");
+		line = readline("\033[0;32mminishell(\033[0;31mv3.0\033[0;32m)$> \033[0m");
 		if (line && line[0])
 			add_history(line);
 		if (!line)
@@ -101,18 +101,10 @@ int main(int ac, char **av, char **env)
 			close_pipes(elems->pipes);
 			wait_pids(elems);
 		}
-		free_tree(script);
-		free(script);
+		// free_tree(script);
+		free_elems(script, elems);
+		//free(script);
 		free (line);
 		line = 0;
    }
 }
-
-// init_env(&env_elems, env);
-//     t_listhead;
-//     head = env_elems->env_list;
-//     while (head)
-//     {
-//         printf("%s <<----->> %s\n", ((t_var_val )head->content)->var, ((t_var_val)head->content)->value);
-//         head = head->next;
-//     }
