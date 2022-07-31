@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Sun Jul 31 13:52:05 2022
+# Make data base, printed on Sun Jul 31 15:34:52 2022
 
 # Variables
 
@@ -16,6 +17,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # automatic
+ 
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -32,7 +34,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 14)
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
@@ -159,10 +161,10 @@ FILES = *c  ./executor/*c ./executor/Build_in/*c
 # Directories
 
 # executor (device 16777227, inode 3858390): 9 files, no impossibilities.
-# . (device 16777227, inode 3858325): 35 files, no impossibilities.
+# . (device 16777227, inode 3858325): 38 files, no impossibilities.
 # executor/Build_in (device 16777227, inode 3858391): 10 files, no impossibilities.
 
-# 54 files, no impossibilities in 3 directories.
+# 57 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -262,7 +264,7 @@ tree_parser_iv.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-31 12:45:42
+#  Last modified 2022-07-31 15:29:02
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -319,7 +321,6 @@ open_files.c:
 #  Last modified 2022-07-30 17:39:56
 #  File has been updated.
 #  Successfully updated.
- 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -332,9 +333,10 @@ pre_line_check.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+ 
 minishell: being_ready.c free.c m_shell_tree.c m_shell_tree_vi.c m_shell_tree_vii.c m_shell_tree_viii.c minishell.c open_files.c open_files_vi.c pre_line_check.c pre_line_check_vi.c pre_line_check_vii.c pre_line_check_viii.c redirection.c redirections_vi.c redirections_vii.c set_env.c signls.c tree_parser.c tree_parser_iv.c tree_parser_vi.c tree_parser_vii.c tree_parser_viii.c executor/execute.c executor/free.c executor/init_env_elems.c executor/init_exec_elems.c executor/utils.c executor/Build_in/buid_in_manager.c executor/Build_in/cd .c executor/Build_in/echo.c executor/Build_in/env.c executor/Build_in/exit.c executor/Build_in/export.c executor/Build_in/pwd.c executor/Build_in/unset.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-31 12:48:54
+#  Last modified 2022-07-31 15:29:09
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -348,7 +350,7 @@ minishell: being_ready.c free.c m_shell_tree.c m_shell_tree_vi.c m_shell_tree_vi
 # Not a target:
 executor/Build_in/pwd.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-31 12:45:05
+#  Last modified 2022-07-31 14:18:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -392,7 +394,7 @@ executor/Build_in/echo.c:
 # Not a target:
 executor/Build_in/cd .c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-31 12:45:05
+#  Last modified 2022-07-31 14:18:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -410,7 +412,7 @@ free.c:
 # Not a target:
 executor/Build_in/export.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-31 12:45:05
+#  Last modified 2022-07-31 14:18:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -496,7 +498,7 @@ executor/utils.c:
 # Not a target:
 minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-31 10:19:23
+#  Last modified 2022-07-31 15:28:57
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -596,6 +598,6 @@ pre_line_check_viii.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jul 31 13:52:05 2022
+# Finished Make data base on Sun Jul 31 15:34:52 2022
 
  
