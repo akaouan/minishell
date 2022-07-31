@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/31 18:02:51 by akaouan           #+#    #+#             */
+/*   Updated: 2022/07/31 18:02:53 by akaouan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	swap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -20,6 +32,17 @@ void	wait_pids(t_exec_elems *elems)
 		waitpid(elems->pids[i], NULL, 0);
 }
 
+void	free_path_elems(char **paths, char *cmd)
+{
+	int	i;
+
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
+	free(cmd);
+}
+
 char	*get_cmd_path(char *cmd, char *path_value)
 {
 	int		i;
@@ -34,20 +57,12 @@ char	*get_cmd_path(char *cmd, char *path_value)
 		cmd_path = ft_strjoin(paths[i], cmd);
 		if (!access(cmd_path, F_OK))
 		{
-			i  = -1;
-			while (paths[++i])
-				free(paths[i]);
-			free(paths);
-			free(cmd);
+			free_path_elems(paths, cmd);
 			return (cmd_path);
 		}
 		free(cmd_path);
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
-	free(cmd);
+	free_path_elems(paths, cmd);
 	ft_putstr_fd("Couldn't found command\n", STDERR_FILENO);
 	global.exit_status = 127;
 	return (NULL);

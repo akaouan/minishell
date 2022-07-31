@@ -94,7 +94,6 @@ int main(int ac, char **av, char **env)
 		script = m_shell_parser(line);
 		tree_parser(script, env, env_elems->env_list);
 		global.is = 1;
-<<<<<<< HEAD
 		if (global.her != -1)
 		{
 			init_exec_elems(&elems, env_elems, script->numofchilds);
@@ -109,18 +108,3 @@ int main(int ac, char **av, char **env)
 		line = 0;
    }
 }
-=======
-		// if (global.her != -1)
-		// {
-		// 	init_exec_elems(&elems, env_elems, script->numofchilds);
-		// 	execution(script, elems);
-		// 	close_pipes(elems->pipes);
-		// 	wait_pids(elems);
-		// }
-		free_tree(script);
-		free(script);
-		free (line);
-		line = 0;
-   }
-}
->>>>>>> 3a42f45614b7d1b90f0584f892c3535ea4608c6b

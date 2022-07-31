@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:21:28 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 19:37:24 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:02:44 by akaouan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
-
 
 typedef struct n_var_val{
 	char	*var;
@@ -49,14 +48,15 @@ typedef struct n_exec_elems{
 	int		cmd_index;
 	int		cmd_input;
 	int		cmd_output;
+	int		is_child;
 
 }	t_exec_elems;
 
 void	wr_error(int fd, char *err_msg);
 void	execute(t_exec_elems *elems);
 void	wait_pids(t_exec_elems *elems);
-void	init_exec_elems(t_exec_elems **elems
-			, t_env *env_elems, int size);
+void	init_exec_elems(t_exec_elems **elems,
+			t_env *env_elems, int size);
 void	update_elems(t_exec_elems *elems, t_prior *data);
 char	*get_cmd_path(char *cmd, char *env_values);
 int		get_path_index(char **env_vars);
@@ -64,7 +64,7 @@ void	swap(int *a, int *b);
 void	close_pipes(int	**pipes);
 void	update_pipes(int **pipes, int to_close);
 void	cmd_cd(t_var_val *old_pwd, t_var_val *pwd, char *path);
-void    cmd_echo(int fd_output, char **args);
+void	cmd_echo(int fd_output, char **args);
 void	free_exec_elems(t_exec_elems *elems);
 void	init_env(t_env **env_elems, char **env);
 char	**get_env_values(char **env, int env_size);

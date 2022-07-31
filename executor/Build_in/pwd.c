@@ -29,12 +29,10 @@ void	update_pwd(char *path, t_var_val *old_pwd, t_var_val *pwd)
 	else if (!ft_strncmp(pwd->value, path, ft_strlen(path)) || 
 			!ft_strncmp(pwd->value, path, ft_strlen(pwd->value)))
 	{
-		printf("true")
-		// printf("true %p\n", path);
-		// free(old_pwd->value);
-		// old_pwd->value = ft_strdup(old_pwd->value);
-		// free(pwd->value);
-		// pwd->value = ft_strdup(path);
+		free(old_pwd->value);
+		old_pwd->value = ft_strdup(old_pwd->value);
+		free(pwd->value);
+		pwd->value = ft_strdup(path);
 	}
 	else if (pwd)
 	{

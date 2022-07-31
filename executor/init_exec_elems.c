@@ -1,7 +1,18 @@
-   #include "minishell.h"
-/*!!!!*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_exec_elems.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaouan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/31 18:02:07 by akaouan           #+#    #+#             */
+/*   Updated: 2022/07/31 18:02:08 by akaouan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *init_cmd_path(t_exec_elems *elems, char *cmd)
+#include "minishell.h"
+
+char	*init_cmd_path(t_exec_elems *elems, char *cmd)
 {
 	char	*cmd_path;
 	char	*path;
@@ -15,7 +26,7 @@ char *init_cmd_path(t_exec_elems *elems, char *cmd)
 				, "PATH", 4))
 		{
 			path = ((t_var_val *)env_list->content)->value;
-			break;
+			break ;
 		}
 		env_list = env_list->next;
 	}
@@ -49,7 +60,7 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 	else if (elems->size > 1 && elems->cmd_input < 2)
 			elems->cmd_input = elems->pipes[elems->p1][0];
 	if (data->cmd->cmd[0] == '/' || data->cmd->cmd[0] == '.')
-		elems->cmd_path = data->cmd->cmd;
+		elems->cmd_path = ft_strdup("data->cmd->cmd");
 	else if (check_build_in(elems))
 		elems->cmd_index++;
 	else
@@ -58,7 +69,7 @@ void	update_elems(t_exec_elems *elems, t_prior *data)
 
 int	init_pipes(int **pipes)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 2)
@@ -72,23 +83,20 @@ int	init_pipes(int **pipes)
 			exit(EXIT_FAILURE);
 		}
 	}
-	
 	return (1);
 }
 
 void	init_exec_elems(t_exec_elems **elems
 			, t_env *env_elems, int size)
 {
-
 	if (!size)
 		size++;
 	*elems = malloc(sizeof(t_exec_elems));
 	(*elems)->pids = malloc((sizeof(int) * size));
 	(*elems)->pipes = malloc(sizeof(int *) * 2);
-
 	if (!(*elems)
-			|| !(*elems)->pids || !(*elems)->pipes
-				|| !init_pipes((*elems)->pipes))
+		|| !(*elems)->pids || !(*elems)->pipes
+		|| !init_pipes((*elems)->pipes))
 	{
 		ft_putstr_fd("Faild to allocate memory\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
@@ -102,4 +110,5 @@ void	init_exec_elems(t_exec_elems **elems
 	(*elems)->args = NULL;
 	(*elems)->cmd_path = NULL;
 	(*elems)->env_elems = env_elems;
+	(*elems)->is_child = 0;
 }

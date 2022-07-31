@@ -1,21 +1,21 @@
 #include "../minishell.h"
 
-int is_option(char *args)
+int	is_option(char *args)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (!args)
-        return (0);
-    if(args[0] == '-')
-    {
-        while (args[++i])
-        {
-            if (args[i] != 'n')
-                return (0);
-        }
-        return (1);
-    }
+	i = 0;
+	if (!args)
+		return (0);
+	if(args[0] == '-')
+	{
+		while (args[++i])
+		{
+			if (args[i] != 'n')
+				return (0);
+		}
+		return (1);
+	}
     return (0);
 }
 
@@ -39,5 +39,5 @@ void    cmd_echo(int fd_output, char **args)
             break ;
     }
     if (!option)
-        ft_putchar_fd('\n', fd_output);
+		ft_putchar_fd('\n', fd_output);
 }
