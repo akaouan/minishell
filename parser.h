@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:37:45 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 20:54:47 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:58:12 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ t_prior*	m_shell_parser(char *line);
 void		get_herdoc(t_cmd *pipe, int j, char *limit);
 int			open_her_doc_i(t_cmd *pip, int i);
 void		open_her_doc(t_cmd *pip);
+char		*ft_strjoinn(char *s1, char const *s2);
 void		open_output(t_cmd *pipe);
 void		open_input(t_cmd *pipe);
 void		open_append(t_cmd *pipe);

@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 09:50:09 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/31 10:19:23 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:28:57 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int main(int ac, char **av, char **env)
 		script = m_shell_parser(line);
 		tree_parser(script, env, env_elems->env_list);
 		global.is = 1;
+<<<<<<< HEAD
 		if (global.her != -1)
 		{
 			init_exec_elems(&elems, env_elems, script->numofchilds);
@@ -108,3 +109,18 @@ int main(int ac, char **av, char **env)
 		line = 0;
    }
 }
+=======
+		// if (global.her != -1)
+		// {
+		// 	init_exec_elems(&elems, env_elems, script->numofchilds);
+		// 	execution(script, elems);
+		// 	close_pipes(elems->pipes);
+		// 	wait_pids(elems);
+		// }
+		free_tree(script);
+		free(script);
+		free (line);
+		line = 0;
+   }
+}
+>>>>>>> 3a42f45614b7d1b90f0584f892c3535ea4608c6b

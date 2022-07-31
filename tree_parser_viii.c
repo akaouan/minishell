@@ -6,7 +6,7 @@
 /*   By: ael-hayy <ael-hayy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 17:29:03 by ael-hayy          #+#    #+#             */
-/*   Updated: 2022/07/30 17:31:13 by ael-hayy         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:57:51 by ael-hayy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	*change_vall(char *str,char *var, char c)
 	j += after_var(&str[j + 1], c);
 	tem_tw = ft_substr(str, j, ft_strlen(str));
 	if (var)
-		str = ft_strjoin(tem, var);
+		str = ft_strjoinn(tem, var);
 	else
 		str = tem;
-	str = ft_strjoin(str, tem_tw);
+	str = ft_strjoinn(str, tem_tw);
 	if (var)
 		free(var);
 	if (tem_tw)
